@@ -1,5 +1,7 @@
 package com.holmesycl.product.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +29,11 @@ public class MainController {
 		account.setEmail("123");
 		accountService.insertAccount(account);
 		return account;
+	}
+	
+	@RequestMapping("/all")
+	public List<Account> listAllAccount(){
+		return accountService.getAccount("u1");
 	}
 
 }

@@ -1,10 +1,12 @@
 package com.holmesycl.product.persistence;
 
+import java.util.List;
+
 import com.holmesycl.product.domain.Account;
 
 public interface AccountMapper {
 
-	Account getAccountByUsername(String username);
+	List<Account> getAccountByUsername(String username);
 
 	Account getAccountByUsernameAndPassword(Account account);
 

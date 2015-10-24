@@ -1,5 +1,7 @@
 package com.holmesycl.product.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +19,7 @@ public class AccountService {
 		this.accountMapper = accountMapper;
 	}
 
-	public Account getAccount(String username) {
+	public List<Account> getAccount(String username) {
 		return accountMapper.getAccountByUsername(username);
 	}
 
