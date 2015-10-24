@@ -8,9 +8,18 @@ public class Account implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4078969289135378567L;
+	private int userId;
 	private String username;
 	private String password;
 	private String email;
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public String getUsername() {
 		return username;

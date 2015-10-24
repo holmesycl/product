@@ -24,9 +24,8 @@ public class MainController {
 		Account account = new Account();
 		account.setUsername("u1");
 		account.setPassword("p1");
-		account.setEmail("1@qq.com");
+		account.setEmail("123");
 		accountService.insertAccount(account);
-
 		return account;
 	}
 
