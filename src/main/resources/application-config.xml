@@ -18,10 +18,32 @@
     <!-- Uncomment and add your base-package here. -->
     <!-- <context:component-scan base-package="org.springframework.samples.service"/>  -->
 
-	<jdbc:embedded-database id="dataSource" type="H2" />
+	<!-- in-memory database and a datasource -->
+    <jdbc:embedded-database id="dataSource" type="H2">
+        <jdbc:script location="classpath:database/product-h2-schema.sql"/>
+        <jdbc:script location="classpath:database/product-h2-dataload.sql"/>
+    </jdbc:embedded-database>
+    
+   	<!-- enable component scanning (beware that this does not enable mapper scanning!) -->    
+    <context:component-scan base-package="com.holmesycl.product.service" />
 
-	<tx:annotation-driven transaction-manager="transactionManager" />
+    <!-- transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
 
-	<context:component-scan base-package="com.holmesycl.product" />
+    <!-- enable transaction demarcation with annotations -->
+    <tx:annotation-driven />
+
+    <!-- define the SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="typeAliasesPackage" value="com.holmesycl.product.domain" />
+    </bean>
+
+    <!-- scan for mappers and let them be autowired -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.holmesycl.product.persistence" />
+    </bean>
 	
 </beans>
