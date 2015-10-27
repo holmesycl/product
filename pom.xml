@@ -27,9 +27,6 @@
 		<mybatis.version>3.3.0</mybatis.version>
 		<!-- mybatis-spring -->
 		<mybatis-spring.version>1.2.3</mybatis-spring.version>
-
-		<!-- druid -->
-		<druid-version>1.0.16</druid-version>
 		
 		<!-- dbcp -->
 		<dbcp.version>1.4</dbcp.version>
@@ -98,13 +95,6 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring-framework.version}</version>
 		</dependency>
-		
-		<!-- druid -->
-		<dependency>
-	        <groupId>com.alibaba</groupId>
-	        <artifactId>druid</artifactId>
-	        <version>${druid-version}</version>
-	    </dependency>
 	    
 	    <dependency>
 			<groupId>commons-dbcp</groupId>
