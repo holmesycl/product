@@ -30,6 +30,9 @@
 
 		<!-- druid -->
 		<druid-version>1.0.16</druid-version>
+		
+		<!-- dbcp -->
+		<dbcp.version>1.4</dbcp.version>
 
 		<!-- mysql -->
 		<mysql.version>5.1.37</mysql.version>
@@ -102,6 +105,12 @@
 	        <artifactId>druid</artifactId>
 	        <version>${druid-version}</version>
 	    </dependency>
+	    
+	    <dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${dbcp.version}</version>
+		</dependency>
 		
 		<!-- mysql -->
 		<dependency>
