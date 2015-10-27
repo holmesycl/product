@@ -1,0 +1,14 @@
+如何在maven中安装oracle驱动？
+1、下载驱动
+通过Oracle官方网站下载相应版本：http://www.oracle.com/technetwork/database/features/jdbc/index-091264.html
+
+2、在驱动jar包所在目录运行maven安装指令（假设jar的名字是ojdbc6.jar，版本是11.2.0.1.0）
+mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=11.2.0.1.0 -Dpackaging=jar -Dfile=ojdbc6.jar
+
+3、在pox.xml中加入依赖
+<oracle.version>11.2.0.1.0</oracle.version>
+<dependency>
+	<groupId>com.oracle</groupId>
+	<artifactId>ojdbc14</artifactId>
+	<version>${oracle.version}</version>
+</dependency>
