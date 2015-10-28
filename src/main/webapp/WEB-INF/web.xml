@@ -22,14 +22,4 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   
-  <!-- Druid内置提供了一个StatViewServlet用于展示Druid的统计信息。 内置监控页面的首页是/druid/index.html -->
-  <servlet>
-      <servlet-name>DruidStatView</servlet-name>
-      <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-      <servlet-name>DruidStatView</servlet-name>
-      <url-pattern>/druid/*</url-pattern>
-  </servlet-mapping>
-  
 </web-app>
