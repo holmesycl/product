@@ -9,15 +9,15 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="${contextPath }/resources/images/favicon.ico">
+<link rel="icon" href="${contextPath }/static/images/favicon.ico">
 
 <title>主页</title>
 <!-- Bootstrap core CSS -->
-<link href="${contextPath }/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${contextPath }/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<script src="${contextPath }/resources/html5shiv/html5shiv.min.js"></script>
-<script src="${contextPath }/resources/respond/respond.min.js"></script>
+<script src="${contextPath }/static/html5shiv/html5shiv.min.js"></script>
+<script src="${contextPath }/static/respond/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
@@ -28,11 +28,11 @@
 	
 	<!-- Bootstrap core JavaScript -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="${contextPath }/resources/jquery/jquery.min.js"></script>
-    <script src="${contextPath }/resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="${contextPath }/static/jquery/jquery.min.js"></script>
+    <script src="${contextPath }/static/bootstrap/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="${contextPath }/resources/ie/ie10-viewport-bug-workaround.js"></script>
+    <script src="${contextPath }/static/ie/ie10-viewport-bug-workaround.js"></script>
 	<!-- angularjs -->
-	<script src="${contextPath }/resources/angularjs/angular.min.js"></script>
+	<script src="${contextPath }/static/angularjs/angular.min.js"></script>
 </body>
 </html>
