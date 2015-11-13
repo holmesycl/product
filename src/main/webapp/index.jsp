@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="common.jsp"%>
-<html ng-app>
+<html lang="zh-CN" ng-app>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="description" content="index">
+<meta name="author" content="yecl">
 <link rel="icon" href="${contextPath }/static/images/favicon.ico">
 
 <title>主页</title>
@@ -22,9 +22,22 @@
 </head>
 <body>
 	
-	Your name: <input type="text" ng-model="yourname" placeholder="World">
-        <hr>
-    Hello {{yourname || 'World'}}!
+	<div class="container">
+	
+		<div ng-init="qty=1;cost=2">
+		  <b>订单:</b>
+		  <div>
+			数量: <input type="number" ng-model="qty" required >
+		  </div>
+		  <div>
+			单价: <input type="number" ng-model="cost" required >
+		  </div>
+		  <div>
+			<b>总价:{{qty * cost | currency}}</b> 
+		  </div>
+		</div>
+		
+	</div>
 	
 	<!-- Bootstrap core JavaScript -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -34,5 +47,6 @@
     <script src="${contextPath }/static/ie/ie10-viewport-bug-workaround.js"></script>
 	<!-- angularjs -->
 	<script src="${contextPath }/static/angularjs/angular.min.js"></script>
+	
 </body>
 </html>

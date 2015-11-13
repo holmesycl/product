@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holmesycl.product.persistence.meta.MetaObjectSpecMapper" >
+  <resultMap id="BaseResultMap" type="com.holmesycl.product.domain.meta.MetaObjectSpec" >
+    <id column="OBJECT_SPEC_ID" property="objectSpecId" jdbcType="DECIMAL" />
+    <result column="OBJECT_SPEC_CODE" property="objectSpecCode" jdbcType="VARCHAR" />
+    <result column="OBJECT_SPEC_NAME" property="objectSpecName" jdbcType="VARCHAR" />
+    <result column="PARENT_OBJECT_SPEC_ID" property="parentObjectSpecId" jdbcType="DECIMAL" />
+    <result column="JAVA_CLASS" property="javaClass" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    OBJECT_SPEC_ID, OBJECT_SPEC_CODE, OBJECT_SPEC_NAME, PARENT_OBJECT_SPEC_ID, JAVA_CLASS, 
+    REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holmesycl.product.domain.meta.MetaObjectSpecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from META.META_OBJECT_SPEC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from META.META_OBJECT_SPEC
+    where OBJECT_SPEC_ID = #{objectSpecId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from META.META_OBJECT_SPEC
+    where OBJECT_SPEC_ID = #{objectSpecId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holmesycl.product.domain.meta.MetaObjectSpecExample" >
+    delete from META.META_OBJECT_SPEC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holmesycl.product.domain.meta.MetaObjectSpec" >
+    <selectKey resultType="java.lang.Long" keyProperty="objectSpecId" order="BEFORE" >
+      SELECT meta.meta_object_spec$seq.nextval FROM dual
+    </selectKey>
+    insert into META.META_OBJECT_SPEC (OBJECT_SPEC_ID, OBJECT_SPEC_CODE, OBJECT_SPEC_NAME, 
+      PARENT_OBJECT_SPEC_ID, JAVA_CLASS, REMARK
+      )
+    values (#{objectSpecId,jdbcType=DECIMAL}, #{objectSpecCode,jdbcType=VARCHAR}, #{objectSpecName,jdbcType=VARCHAR}, 
+      #{parentObjectSpecId,jdbcType=DECIMAL}, #{javaClass,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.holmesycl.product.domain.meta.MetaObjectSpec" >
+    <selectKey resultType="java.lang.Long" keyProperty="objectSpecId" order="BEFORE" >
+      SELECT meta.meta_object_spec$seq.nextval FROM dual
+    </selectKey>
+    insert into META.META_OBJECT_SPEC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      OBJECT_SPEC_ID,
+      <if test="objectSpecCode != null" >
+        OBJECT_SPEC_CODE,
+      </if>
+      <if test="objectSpecName != null" >
+        OBJECT_SPEC_NAME,
+      </if>
+      <if test="parentObjectSpecId != null" >
+        PARENT_OBJECT_SPEC_ID,
+      </if>
+      <if test="javaClass != null" >
+        JAVA_CLASS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{objectSpecId,jdbcType=DECIMAL},
+      <if test="objectSpecCode != null" >
+        #{objectSpecCode,jdbcType=VARCHAR},
+      </if>
+      <if test="objectSpecName != null" >
+        #{objectSpecName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentObjectSpecId != null" >
+        #{parentObjectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="javaClass != null" >
+        #{javaClass,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holmesycl.product.domain.meta.MetaObjectSpecExample" resultType="java.lang.Integer" >
+    select count(*) from META.META_OBJECT_SPEC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update META.META_OBJECT_SPEC
+    <set >
+      <if test="record.objectSpecId != null" >
+        OBJECT_SPEC_ID = #{record.objectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.objectSpecCode != null" >
+        OBJECT_SPEC_CODE = #{record.objectSpecCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objectSpecName != null" >
+        OBJECT_SPEC_NAME = #{record.objectSpecName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentObjectSpecId != null" >
+        PARENT_OBJECT_SPEC_ID = #{record.parentObjectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.javaClass != null" >
+        JAVA_CLASS = #{record.javaClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update META.META_OBJECT_SPEC
+    set OBJECT_SPEC_ID = #{record.objectSpecId,jdbcType=DECIMAL},
+      OBJECT_SPEC_CODE = #{record.objectSpecCode,jdbcType=VARCHAR},
+      OBJECT_SPEC_NAME = #{record.objectSpecName,jdbcType=VARCHAR},
+      PARENT_OBJECT_SPEC_ID = #{record.parentObjectSpecId,jdbcType=DECIMAL},
+      JAVA_CLASS = #{record.javaClass,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holmesycl.product.domain.meta.MetaObjectSpec" >
+    update META.META_OBJECT_SPEC
+    <set >
+      <if test="objectSpecCode != null" >
+        OBJECT_SPEC_CODE = #{objectSpecCode,jdbcType=VARCHAR},
+      </if>
+      <if test="objectSpecName != null" >
+        OBJECT_SPEC_NAME = #{objectSpecName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentObjectSpecId != null" >
+        PARENT_OBJECT_SPEC_ID = #{parentObjectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="javaClass != null" >
+        JAVA_CLASS = #{javaClass,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where OBJECT_SPEC_ID = #{objectSpecId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holmesycl.product.domain.meta.MetaObjectSpec" >
+    update META.META_OBJECT_SPEC
+    set OBJECT_SPEC_CODE = #{objectSpecCode,jdbcType=VARCHAR},
+      OBJECT_SPEC_NAME = #{objectSpecName,jdbcType=VARCHAR},
+      PARENT_OBJECT_SPEC_ID = #{parentObjectSpecId,jdbcType=DECIMAL},
+      JAVA_CLASS = #{javaClass,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where OBJECT_SPEC_ID = #{objectSpecId,jdbcType=DECIMAL}
+  </update>
+</mapper>
