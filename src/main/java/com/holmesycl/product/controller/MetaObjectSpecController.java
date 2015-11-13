@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageInfo;
 import com.holmesycl.product.domain.meta.MetaObjectSpec;
 import com.holmesycl.product.service.MetaObjectSpecService;
 
@@ -22,6 +23,11 @@ public class MetaObjectSpecController {
 		object.setObjectSpecName("Test_T");
 		metaObjectSpecService.save(object);
 		return object;
+	}
+	
+	@RequestMapping("/page")
+	public PageInfo<MetaObjectSpec> page(){
+		return metaObjectSpecService.page();
 	}
 
 }

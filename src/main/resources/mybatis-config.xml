@@ -7,4 +7,17 @@
 		<!-- 是否启用下划线与驼峰式命名规则的映射(如first_name => firstName) -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
+	<!-- 
+	    plugins在配置文件中的位置必须符合要求，否则会报错，顺序如下:
+	    properties?, settings?, 
+	    typeAliases?, typeHandlers?, 
+	    objectFactory?,objectWrapperFactory?, 
+	    plugins?, 
+	    environments?, databaseIdProvider?, mappers?
+	-->
+	<plugins>
+	    <!-- com.github.pagehelper为PageHelper类所在包名 -->
+	    <plugin interceptor="com.github.pagehelper.PageHelper">
+	    </plugin>
+	</plugins>
 </configuration>
