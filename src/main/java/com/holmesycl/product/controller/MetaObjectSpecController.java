@@ -1,14 +1,16 @@
 package com.holmesycl.product.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.holmesycl.product.domain.meta.MetaObjectSpec;
 import com.holmesycl.product.service.MetaObjectSpecService;
 
-@RestController
+@Controller
 @RequestMapping("/meta/object")
 public class MetaObjectSpecController {
 
@@ -16,6 +18,7 @@ public class MetaObjectSpecController {
 	private MetaObjectSpecService metaObjectSpecService;
 
 	@RequestMapping("/save")
+	@ResponseBody
 	public MetaObjectSpec save(String name) {
 		MetaObjectSpec object = new MetaObjectSpec();
 		object.setObjectSpecId(1231231L);
@@ -25,9 +28,16 @@ public class MetaObjectSpecController {
 		return object;
 	}
 	
-	@RequestMapping("/page")
-	public PageInfo<MetaObjectSpec> page(){
-		return metaObjectSpecService.page();
+	
+	@RequestMapping("/home.html")
+	public String view(){
+		return "meta/object";
+	}
+	
+	@RequestMapping("/search")
+	@ResponseBody
+	public PageInfo<MetaObjectSpec> page(Page<MetaObjectSpec> page){
+		return metaObjectSpecService.page(page);
 	}
 
 }

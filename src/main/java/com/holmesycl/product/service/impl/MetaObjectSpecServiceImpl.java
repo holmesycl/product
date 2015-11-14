@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.holmesycl.product.domain.meta.MetaObjectSpec;
@@ -25,12 +26,11 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 	}
 
 	@Transactional(readOnly = true)
-	public PageInfo<MetaObjectSpec> page() {
-		//PageHelper.startPage(0, 10);
+	public PageInfo<MetaObjectSpec> page(Page<MetaObjectSpec> page) {
+		PageHelper.startPage(page.getPageNum(), page.getPageSize());
 		MetaObjectSpecExample metaObjectSpecExample = new MetaObjectSpecExample();
 		metaObjectSpecExample.createCriteria().andObjectSpecIdIsNotNull();
 		List<MetaObjectSpec> objects = metaObjectSpecMapper.selectByExample(metaObjectSpecExample);
-		System.out.println(objects);
 		return new PageInfo<MetaObjectSpec>(objects);
 	}
 
