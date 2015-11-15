@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common.jsp"%>
-<html lang="zh-CN" ng-app="phonecatApp">
+<html lang="zh-CN" ng-app="objectApp">
   <head>
     <meta charset="utf-8">
     <title>元数据-对象</title>
@@ -22,30 +22,29 @@
       <script src="${contextPath }/static/Flat-UI/js/vendor/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-controller="PhoneListCtrl">
+  <body ng-controller="ObjectCtrl">
   	
-    <div class="container-fluid">
+    <div class="container">
     <div class="row">
-      <div class="col-md-2">
-        Search: <input ng-model="query">
-		  Sort by:
-		  <select ng-model="orderProp">
-		    <option value="name">Alphabetical</option>
-		    <option value="age">Newest</option>
-		  </select>
+      <div class="col-md-8">
+        <form class="form-inline">
+		  <div class="form-group">
+		    <input ng-model="query" type="text" class="form-control" placeholder="Search">
+		  </div>
+		  <button ng-click="loadObject()" type="submit" class="btn btn-default">查询</button>
+		</form>
+      </div>
+      <div class="col-md-4">
 
       </div>
-      <div class="col-md-10">
-        <!--Body content-->
-
-        <ul class="phones">
-	    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
-	      <span>{{phone.name}}</span>
-	      <p>{{phone.snippet}}</p>
-	    </li>
-	  </ul>
-
-      </div>
+    </div>
+    <div class="row">
+    	<div class="col-md-12" >
+    		<ul infinite-scroll="nextPage()">
+    			<li ng-repeat="object in objects | filter:query">{{ object.objectSpecName }}</li>
+    			<!-- <li ng-show="busy">Loading data...</li> -->
+    		</ul>
+    	</div>
     </div>
   </div>
     <!-- /.container -->
@@ -58,6 +57,8 @@
     <script src="${contextPath }/static/Flat-UI/js/flat-ui.min.js"></script>
 	<!-- angularjs -->
 	<script src="${contextPath }/static/angularjs/angular.min.js"></script>
+	<script src="${contextPath }/static/angularjs/ng-infinite-scroll.min.js"></script>
 	<script src="${contextPath }/static/views/meta/object.js"></script>
+	<script src="${contextPath }/static/common/pageInfo.js"></script>
   </body>
 </html>
