@@ -39,7 +39,6 @@ public class MetaObjectSpecController {
 	@RequestMapping("/search")
 	@ResponseBody
 	public PageInfo<MetaObjectSpec> page(HttpServletRequest request, PageParam pageParam, String query){
-		query = request.getParameter("query");
 		return metaObjectSpecService.page(pageParam, query);
 	}
 
