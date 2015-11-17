@@ -2,10 +2,10 @@ package com.holmesycl.product.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -30,8 +30,10 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 	public PageInfo<MetaObjectSpec> page(PageParam pageParam, String query) {
 		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
 		MetaObjectSpecExample metaObjectSpecExample = new MetaObjectSpecExample();
-		if(!StringUtils.isEmpty(query)){
-			metaObjectSpecExample.createCriteria().andObjectSpecNameLike(query);
+		if (StringUtils.isNotBlank(query)) {
+			metaObjectSpecExample.createCriteria().andObjectSpecNameLike("%" + query + "%");
+		} else {
+			metaObjectSpecExample.createCriteria().andObjectSpecCodeIsNotNull();
 		}
 		List<MetaObjectSpec> objects = metaObjectSpecMapper.selectByExample(metaObjectSpecExample);
 		return new PageInfo<MetaObjectSpec>(objects);

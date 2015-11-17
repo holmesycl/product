@@ -47,7 +47,13 @@
 
 		<!-- jackson -->
 		<jackson.version>2.6.3</jackson.version>
-
+		
+		<!-- commons-lang3 -->
+		<commons-lang3.version>3.4</commons-lang3.version>
+		
+		<!-- guava -->
+		<guava.version>18.0</guava.version>
+		
 		<!-- Test -->
 		<junit.version>4.12</junit.version>
 
@@ -158,6 +164,18 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
 		</dependency>
 
 		<!-- Test Artifacts -->

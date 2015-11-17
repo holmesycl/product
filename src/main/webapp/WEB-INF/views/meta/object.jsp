@@ -31,7 +31,7 @@
 		  <div class="form-group">
 		    <input ng-model="query" type="text" class="form-control" placeholder="Search">
 		  </div>
-		  <button ng-click="loadObject()" type="submit" class="btn btn-default">查询</button>
+		  <button ng-click="searchObject()" type="submit" class="btn btn-default">查询</button>
 		</form>
       </div>
       <div class="col-md-4">
@@ -41,8 +41,8 @@
     <div class="row">
     	<div class="col-md-12" >
     		<ul infinite-scroll="nextPage()">
-    			<li ng-repeat="object in objects | filter:query">{{ object.objectSpecName }}</li>
-    			<!-- <li ng-show="busy">Loading data...</li> -->
+    			<li ng-repeat="object in objects | filter:query">{{ $index + 1 }} {{ object.objectSpecName }}</li>
+    			<li ng-show="busy">Loading data...</li>
     		</ul>
     	</div>
     </div>

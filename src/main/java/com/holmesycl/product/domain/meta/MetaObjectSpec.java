@@ -1,7 +1,14 @@
 package com.holmesycl.product.domain.meta;
 
-public class MetaObjectSpec {
-    private Long objectSpecId;
+import java.io.Serializable;
+
+public class MetaObjectSpec implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7906217350060997624L;
+
+	private Long objectSpecId;
 
     private String objectSpecCode;
 
