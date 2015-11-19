@@ -1,175 +1,182 @@
 package com.holmesycl.product.domain.meta;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UiTemplate {
-    private Long uiTempId;
+public class UiTemplate implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8660759908550871921L;
 
-    private Long objectSpecId;
+	private Long uiTempId;
 
-    private String itemType;
+	private Long objectSpecId;
 
-    private String pceItemType;
+	private String itemType;
 
-    private String internationalName;
+	private String pceItemType;
 
-    private String nativeName;
+	private String internationalName;
 
-    private String uiTempDesc;
+	private String nativeName;
 
-    private Long creater;
+	private String uiTempDesc;
 
-    private Date createDate;
+	private Long creater;
 
-    private Long modifier;
+	private Date createDate;
 
-    private Date modifyDate;
+	private Long modifier;
 
-    private String delFlag;
+	private Date modifyDate;
 
-    private String state;
+	private String delFlag;
 
-    private String templateType;
+	private String state;
 
-    private Long reuseUiTempId;
+	private String templateType;
 
-    private String width;
+	private Long reuseUiTempId;
 
-    private String height;
+	private String width;
 
-    public Long getUiTempId() {
-        return uiTempId;
-    }
+	private String height;
 
-    public void setUiTempId(Long uiTempId) {
-        this.uiTempId = uiTempId;
-    }
+	public Long getUiTempId() {
+		return uiTempId;
+	}
 
-    public Long getObjectSpecId() {
-        return objectSpecId;
-    }
+	public void setUiTempId(Long uiTempId) {
+		this.uiTempId = uiTempId;
+	}
 
-    public void setObjectSpecId(Long objectSpecId) {
-        this.objectSpecId = objectSpecId;
-    }
+	public Long getObjectSpecId() {
+		return objectSpecId;
+	}
 
-    public String getItemType() {
-        return itemType;
-    }
+	public void setObjectSpecId(Long objectSpecId) {
+		this.objectSpecId = objectSpecId;
+	}
 
-    public void setItemType(String itemType) {
-        this.itemType = itemType == null ? null : itemType.trim();
-    }
+	public String getItemType() {
+		return itemType;
+	}
 
-    public String getPceItemType() {
-        return pceItemType;
-    }
+	public void setItemType(String itemType) {
+		this.itemType = itemType == null ? null : itemType.trim();
+	}
 
-    public void setPceItemType(String pceItemType) {
-        this.pceItemType = pceItemType == null ? null : pceItemType.trim();
-    }
+	public String getPceItemType() {
+		return pceItemType;
+	}
 
-    public String getInternationalName() {
-        return internationalName;
-    }
+	public void setPceItemType(String pceItemType) {
+		this.pceItemType = pceItemType == null ? null : pceItemType.trim();
+	}
 
-    public void setInternationalName(String internationalName) {
-        this.internationalName = internationalName == null ? null : internationalName.trim();
-    }
+	public String getInternationalName() {
+		return internationalName;
+	}
 
-    public String getNativeName() {
-        return nativeName;
-    }
+	public void setInternationalName(String internationalName) {
+		this.internationalName = internationalName == null ? null
+				: internationalName.trim();
+	}
 
-    public void setNativeName(String nativeName) {
-        this.nativeName = nativeName == null ? null : nativeName.trim();
-    }
+	public String getNativeName() {
+		return nativeName;
+	}
 
-    public String getUiTempDesc() {
-        return uiTempDesc;
-    }
+	public void setNativeName(String nativeName) {
+		this.nativeName = nativeName == null ? null : nativeName.trim();
+	}
 
-    public void setUiTempDesc(String uiTempDesc) {
-        this.uiTempDesc = uiTempDesc == null ? null : uiTempDesc.trim();
-    }
+	public String getUiTempDesc() {
+		return uiTempDesc;
+	}
 
-    public Long getCreater() {
-        return creater;
-    }
+	public void setUiTempDesc(String uiTempDesc) {
+		this.uiTempDesc = uiTempDesc == null ? null : uiTempDesc.trim();
+	}
 
-    public void setCreater(Long creater) {
-        this.creater = creater;
-    }
+	public Long getCreater() {
+		return creater;
+	}
 
-    public Date getCreateDate() {
-        return createDate;
-    }
+	public void setCreater(Long creater) {
+		this.creater = creater;
+	}
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+	public Date getCreateDate() {
+		return createDate;
+	}
 
-    public Long getModifier() {
-        return modifier;
-    }
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 
-    public void setModifier(Long modifier) {
-        this.modifier = modifier;
-    }
+	public Long getModifier() {
+		return modifier;
+	}
 
-    public Date getModifyDate() {
-        return modifyDate;
-    }
+	public void setModifier(Long modifier) {
+		this.modifier = modifier;
+	}
 
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
-    }
+	public Date getModifyDate() {
+		return modifyDate;
+	}
 
-    public String getDelFlag() {
-        return delFlag;
-    }
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
 
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag == null ? null : delFlag.trim();
-    }
+	public String getDelFlag() {
+		return delFlag;
+	}
 
-    public String getState() {
-        return state;
-    }
+	public void setDelFlag(String delFlag) {
+		this.delFlag = delFlag == null ? null : delFlag.trim();
+	}
 
-    public void setState(String state) {
-        this.state = state == null ? null : state.trim();
-    }
+	public String getState() {
+		return state;
+	}
 
-    public String getTemplateType() {
-        return templateType;
-    }
+	public void setState(String state) {
+		this.state = state == null ? null : state.trim();
+	}
 
-    public void setTemplateType(String templateType) {
-        this.templateType = templateType == null ? null : templateType.trim();
-    }
+	public String getTemplateType() {
+		return templateType;
+	}
 
-    public Long getReuseUiTempId() {
-        return reuseUiTempId;
-    }
+	public void setTemplateType(String templateType) {
+		this.templateType = templateType == null ? null : templateType.trim();
+	}
 
-    public void setReuseUiTempId(Long reuseUiTempId) {
-        this.reuseUiTempId = reuseUiTempId;
-    }
+	public Long getReuseUiTempId() {
+		return reuseUiTempId;
+	}
 
-    public String getWidth() {
-        return width;
-    }
+	public void setReuseUiTempId(Long reuseUiTempId) {
+		this.reuseUiTempId = reuseUiTempId;
+	}
 
-    public void setWidth(String width) {
-        this.width = width == null ? null : width.trim();
-    }
+	public String getWidth() {
+		return width;
+	}
 
-    public String getHeight() {
-        return height;
-    }
+	public void setWidth(String width) {
+		this.width = width == null ? null : width.trim();
+	}
 
-    public void setHeight(String height) {
-        this.height = height == null ? null : height.trim();
-    }
+	public String getHeight() {
+		return height;
+	}
+
+	public void setHeight(String height) {
+		this.height = height == null ? null : height.trim();
+	}
 }
