@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holmesycl.product.persistence.meta.UiComponentMapper" >
+  <resultMap id="BaseResultMap" type="com.holmesycl.product.domain.meta.UiComponent" >
+    <id column="UI_COMPONENT_ID" property="uiComponentId" jdbcType="DECIMAL" />
+    <result column="INTERNATIONAL_NAME" property="internationalName" jdbcType="VARCHAR" />
+    <result column="NATIVE_NAME" property="nativeName" jdbcType="VARCHAR" />
+    <result column="UI_COMPONENT_DESC" property="uiComponentDesc" jdbcType="VARCHAR" />
+    <result column="UI_TEMP_ID" property="uiTempId" jdbcType="DECIMAL" />
+    <result column="REF_UI_TEMP_ID" property="refUiTempId" jdbcType="DECIMAL" />
+    <result column="COMP_TYPE" property="compType" jdbcType="VARCHAR" />
+    <result column="UP_UI_COMPONENT_ID" property="upUiComponentId" jdbcType="DECIMAL" />
+    <result column="UI_MODEL_ID" property="uiModelId" jdbcType="DECIMAL" />
+    <result column="IS_EDIT" property="isEdit" jdbcType="CHAR" />
+    <result column="HELP_INFO" property="helpInfo" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="IMAGE_PATTERN" property="imagePattern" jdbcType="VARCHAR" />
+    <result column="CREATER" property="creater" jdbcType="DECIMAL" />
+    <result column="MODIFIER" property="modifier" jdbcType="DECIMAL" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="DEL_FLAG" property="delFlag" jdbcType="CHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="PARAMETER1" property="parameter1" jdbcType="VARCHAR" />
+    <result column="PARAMETER2" property="parameter2" jdbcType="VARCHAR" />
+    <result column="ORDER_SEQ" property="orderSeq" jdbcType="DECIMAL" />
+    <result column="REUSE_UI_TEMP_ID" property="reuseUiTempId" jdbcType="DECIMAL" />
+    <result column="GROUP_NAME" property="groupName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UI_COMPONENT_ID, INTERNATIONAL_NAME, NATIVE_NAME, UI_COMPONENT_DESC, UI_TEMP_ID, 
+    REF_UI_TEMP_ID, COMP_TYPE, UP_UI_COMPONENT_ID, UI_MODEL_ID, IS_EDIT, HELP_INFO, CREATE_DATE, 
+    IMAGE_PATTERN, CREATER, MODIFIER, MODIFY_DATE, DEL_FLAG, STATE, PARAMETER1, PARAMETER2, 
+    ORDER_SEQ, REUSE_UI_TEMP_ID, GROUP_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holmesycl.product.domain.meta.UiComponentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from META.UI_COMPONENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from META.UI_COMPONENT
+    where UI_COMPONENT_ID = #{uiComponentId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from META.UI_COMPONENT
+    where UI_COMPONENT_ID = #{uiComponentId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holmesycl.product.domain.meta.UiComponentExample" >
+    delete from META.UI_COMPONENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holmesycl.product.domain.meta.UiComponent" >
+    <selectKey resultType="java.lang.Long" keyProperty="uiComponentId" order="BEFORE" >
+      SELECT meta.ui_component$seq.nextval FROM dual
+    </selectKey>
+    insert into META.UI_COMPONENT (UI_COMPONENT_ID, INTERNATIONAL_NAME, 
+      NATIVE_NAME, UI_COMPONENT_DESC, UI_TEMP_ID, 
+      REF_UI_TEMP_ID, COMP_TYPE, UP_UI_COMPONENT_ID, 
+      UI_MODEL_ID, IS_EDIT, HELP_INFO, 
+      CREATE_DATE, IMAGE_PATTERN, CREATER, 
+      MODIFIER, MODIFY_DATE, DEL_FLAG, 
+      STATE, PARAMETER1, PARAMETER2, 
+      ORDER_SEQ, REUSE_UI_TEMP_ID, GROUP_NAME
+      )
+    values (#{uiComponentId,jdbcType=DECIMAL}, #{internationalName,jdbcType=VARCHAR}, 
+      #{nativeName,jdbcType=VARCHAR}, #{uiComponentDesc,jdbcType=VARCHAR}, #{uiTempId,jdbcType=DECIMAL}, 
+      #{refUiTempId,jdbcType=DECIMAL}, #{compType,jdbcType=VARCHAR}, #{upUiComponentId,jdbcType=DECIMAL}, 
+      #{uiModelId,jdbcType=DECIMAL}, #{isEdit,jdbcType=CHAR}, #{helpInfo,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{imagePattern,jdbcType=VARCHAR}, #{creater,jdbcType=DECIMAL}, 
+      #{modifier,jdbcType=DECIMAL}, #{modifyDate,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=CHAR}, 
+      #{state,jdbcType=VARCHAR}, #{parameter1,jdbcType=VARCHAR}, #{parameter2,jdbcType=VARCHAR}, 
+      #{orderSeq,jdbcType=DECIMAL}, #{reuseUiTempId,jdbcType=DECIMAL}, #{groupName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.holmesycl.product.domain.meta.UiComponent" >
+    <selectKey resultType="java.lang.Long" keyProperty="uiComponentId" order="BEFORE" >
+      SELECT meta.ui_component$seq.nextval FROM dual
+    </selectKey>
+    insert into META.UI_COMPONENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      UI_COMPONENT_ID,
+      <if test="internationalName != null" >
+        INTERNATIONAL_NAME,
+      </if>
+      <if test="nativeName != null" >
+        NATIVE_NAME,
+      </if>
+      <if test="uiComponentDesc != null" >
+        UI_COMPONENT_DESC,
+      </if>
+      <if test="uiTempId != null" >
+        UI_TEMP_ID,
+      </if>
+      <if test="refUiTempId != null" >
+        REF_UI_TEMP_ID,
+      </if>
+      <if test="compType != null" >
+        COMP_TYPE,
+      </if>
+      <if test="upUiComponentId != null" >
+        UP_UI_COMPONENT_ID,
+      </if>
+      <if test="uiModelId != null" >
+        UI_MODEL_ID,
+      </if>
+      <if test="isEdit != null" >
+        IS_EDIT,
+      </if>
+      <if test="helpInfo != null" >
+        HELP_INFO,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="imagePattern != null" >
+        IMAGE_PATTERN,
+      </if>
+      <if test="creater != null" >
+        CREATER,
+      </if>
+      <if test="modifier != null" >
+        MODIFIER,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="parameter1 != null" >
+        PARAMETER1,
+      </if>
+      <if test="parameter2 != null" >
+        PARAMETER2,
+      </if>
+      <if test="orderSeq != null" >
+        ORDER_SEQ,
+      </if>
+      <if test="reuseUiTempId != null" >
+        REUSE_UI_TEMP_ID,
+      </if>
+      <if test="groupName != null" >
+        GROUP_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{uiComponentId,jdbcType=DECIMAL},
+      <if test="internationalName != null" >
+        #{internationalName,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeName != null" >
+        #{nativeName,jdbcType=VARCHAR},
+      </if>
+      <if test="uiComponentDesc != null" >
+        #{uiComponentDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="uiTempId != null" >
+        #{uiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="refUiTempId != null" >
+        #{refUiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="compType != null" >
+        #{compType,jdbcType=VARCHAR},
+      </if>
+      <if test="upUiComponentId != null" >
+        #{upUiComponentId,jdbcType=DECIMAL},
+      </if>
+      <if test="uiModelId != null" >
+        #{uiModelId,jdbcType=DECIMAL},
+      </if>
+      <if test="isEdit != null" >
+        #{isEdit,jdbcType=CHAR},
+      </if>
+      <if test="helpInfo != null" >
+        #{helpInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imagePattern != null" >
+        #{imagePattern,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=DECIMAL},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=DECIMAL},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter1 != null" >
+        #{parameter1,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter2 != null" >
+        #{parameter2,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSeq != null" >
+        #{orderSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="reuseUiTempId != null" >
+        #{reuseUiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holmesycl.product.domain.meta.UiComponentExample" resultType="java.lang.Integer" >
+    select count(*) from META.UI_COMPONENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update META.UI_COMPONENT
+    <set >
+      <if test="record.uiComponentId != null" >
+        UI_COMPONENT_ID = #{record.uiComponentId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.internationalName != null" >
+        INTERNATIONAL_NAME = #{record.internationalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativeName != null" >
+        NATIVE_NAME = #{record.nativeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uiComponentDesc != null" >
+        UI_COMPONENT_DESC = #{record.uiComponentDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uiTempId != null" >
+        UI_TEMP_ID = #{record.uiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.refUiTempId != null" >
+        REF_UI_TEMP_ID = #{record.refUiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.compType != null" >
+        COMP_TYPE = #{record.compType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upUiComponentId != null" >
+        UP_UI_COMPONENT_ID = #{record.upUiComponentId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.uiModelId != null" >
+        UI_MODEL_ID = #{record.uiModelId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isEdit != null" >
+        IS_EDIT = #{record.isEdit,jdbcType=CHAR},
+      </if>
+      <if test="record.helpInfo != null" >
+        HELP_INFO = #{record.helpInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.imagePattern != null" >
+        IMAGE_PATTERN = #{record.imagePattern,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        CREATER = #{record.creater,jdbcType=DECIMAL},
+      </if>
+      <if test="record.modifier != null" >
+        MODIFIER = #{record.modifier,jdbcType=DECIMAL},
+      </if>
+      <if test="record.modifyDate != null" >
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null" >
+        DEL_FLAG = #{record.delFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parameter1 != null" >
+        PARAMETER1 = #{record.parameter1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parameter2 != null" >
+        PARAMETER2 = #{record.parameter2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderSeq != null" >
+        ORDER_SEQ = #{record.orderSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reuseUiTempId != null" >
+        REUSE_UI_TEMP_ID = #{record.reuseUiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.groupName != null" >
+        GROUP_NAME = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update META.UI_COMPONENT
+    set UI_COMPONENT_ID = #{record.uiComponentId,jdbcType=DECIMAL},
+      INTERNATIONAL_NAME = #{record.internationalName,jdbcType=VARCHAR},
+      NATIVE_NAME = #{record.nativeName,jdbcType=VARCHAR},
+      UI_COMPONENT_DESC = #{record.uiComponentDesc,jdbcType=VARCHAR},
+      UI_TEMP_ID = #{record.uiTempId,jdbcType=DECIMAL},
+      REF_UI_TEMP_ID = #{record.refUiTempId,jdbcType=DECIMAL},
+      COMP_TYPE = #{record.compType,jdbcType=VARCHAR},
+      UP_UI_COMPONENT_ID = #{record.upUiComponentId,jdbcType=DECIMAL},
+      UI_MODEL_ID = #{record.uiModelId,jdbcType=DECIMAL},
+      IS_EDIT = #{record.isEdit,jdbcType=CHAR},
+      HELP_INFO = #{record.helpInfo,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      IMAGE_PATTERN = #{record.imagePattern,jdbcType=VARCHAR},
+      CREATER = #{record.creater,jdbcType=DECIMAL},
+      MODIFIER = #{record.modifier,jdbcType=DECIMAL},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      DEL_FLAG = #{record.delFlag,jdbcType=CHAR},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      PARAMETER1 = #{record.parameter1,jdbcType=VARCHAR},
+      PARAMETER2 = #{record.parameter2,jdbcType=VARCHAR},
+      ORDER_SEQ = #{record.orderSeq,jdbcType=DECIMAL},
+      REUSE_UI_TEMP_ID = #{record.reuseUiTempId,jdbcType=DECIMAL},
+      GROUP_NAME = #{record.groupName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holmesycl.product.domain.meta.UiComponent" >
+    update META.UI_COMPONENT
+    <set >
+      <if test="internationalName != null" >
+        INTERNATIONAL_NAME = #{internationalName,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeName != null" >
+        NATIVE_NAME = #{nativeName,jdbcType=VARCHAR},
+      </if>
+      <if test="uiComponentDesc != null" >
+        UI_COMPONENT_DESC = #{uiComponentDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="uiTempId != null" >
+        UI_TEMP_ID = #{uiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="refUiTempId != null" >
+        REF_UI_TEMP_ID = #{refUiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="compType != null" >
+        COMP_TYPE = #{compType,jdbcType=VARCHAR},
+      </if>
+      <if test="upUiComponentId != null" >
+        UP_UI_COMPONENT_ID = #{upUiComponentId,jdbcType=DECIMAL},
+      </if>
+      <if test="uiModelId != null" >
+        UI_MODEL_ID = #{uiModelId,jdbcType=DECIMAL},
+      </if>
+      <if test="isEdit != null" >
+        IS_EDIT = #{isEdit,jdbcType=CHAR},
+      </if>
+      <if test="helpInfo != null" >
+        HELP_INFO = #{helpInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imagePattern != null" >
+        IMAGE_PATTERN = #{imagePattern,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        CREATER = #{creater,jdbcType=DECIMAL},
+      </if>
+      <if test="modifier != null" >
+        MODIFIER = #{modifier,jdbcType=DECIMAL},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter1 != null" >
+        PARAMETER1 = #{parameter1,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter2 != null" >
+        PARAMETER2 = #{parameter2,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSeq != null" >
+        ORDER_SEQ = #{orderSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="reuseUiTempId != null" >
+        REUSE_UI_TEMP_ID = #{reuseUiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="groupName != null" >
+        GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UI_COMPONENT_ID = #{uiComponentId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holmesycl.product.domain.meta.UiComponent" >
+    update META.UI_COMPONENT
+    set INTERNATIONAL_NAME = #{internationalName,jdbcType=VARCHAR},
+      NATIVE_NAME = #{nativeName,jdbcType=VARCHAR},
+      UI_COMPONENT_DESC = #{uiComponentDesc,jdbcType=VARCHAR},
+      UI_TEMP_ID = #{uiTempId,jdbcType=DECIMAL},
+      REF_UI_TEMP_ID = #{refUiTempId,jdbcType=DECIMAL},
+      COMP_TYPE = #{compType,jdbcType=VARCHAR},
+      UP_UI_COMPONENT_ID = #{upUiComponentId,jdbcType=DECIMAL},
+      UI_MODEL_ID = #{uiModelId,jdbcType=DECIMAL},
+      IS_EDIT = #{isEdit,jdbcType=CHAR},
+      HELP_INFO = #{helpInfo,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      IMAGE_PATTERN = #{imagePattern,jdbcType=VARCHAR},
+      CREATER = #{creater,jdbcType=DECIMAL},
+      MODIFIER = #{modifier,jdbcType=DECIMAL},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      DEL_FLAG = #{delFlag,jdbcType=CHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      PARAMETER1 = #{parameter1,jdbcType=VARCHAR},
+      PARAMETER2 = #{parameter2,jdbcType=VARCHAR},
+      ORDER_SEQ = #{orderSeq,jdbcType=DECIMAL},
+      REUSE_UI_TEMP_ID = #{reuseUiTempId,jdbcType=DECIMAL},
+      GROUP_NAME = #{groupName,jdbcType=VARCHAR}
+    where UI_COMPONENT_ID = #{uiComponentId,jdbcType=DECIMAL}
+  </update>
+</mapper>

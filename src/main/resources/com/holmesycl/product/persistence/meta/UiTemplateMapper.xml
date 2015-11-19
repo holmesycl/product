@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holmesycl.product.persistence.meta.UiTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.holmesycl.product.domain.meta.UiTemplate" >
+    <id column="UI_TEMP_ID" property="uiTempId" jdbcType="DECIMAL" />
+    <result column="OBJECT_SPEC_ID" property="objectSpecId" jdbcType="DECIMAL" />
+    <result column="ITEM_TYPE" property="itemType" jdbcType="VARCHAR" />
+    <result column="PCE_ITEM_TYPE" property="pceItemType" jdbcType="VARCHAR" />
+    <result column="INTERNATIONAL_NAME" property="internationalName" jdbcType="VARCHAR" />
+    <result column="NATIVE_NAME" property="nativeName" jdbcType="VARCHAR" />
+    <result column="UI_TEMP_DESC" property="uiTempDesc" jdbcType="VARCHAR" />
+    <result column="CREATER" property="creater" jdbcType="DECIMAL" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFIER" property="modifier" jdbcType="DECIMAL" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="DEL_FLAG" property="delFlag" jdbcType="CHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="TEMPLATE_TYPE" property="templateType" jdbcType="VARCHAR" />
+    <result column="REUSE_UI_TEMP_ID" property="reuseUiTempId" jdbcType="DECIMAL" />
+    <result column="WIDTH" property="width" jdbcType="VARCHAR" />
+    <result column="HEIGHT" property="height" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UI_TEMP_ID, OBJECT_SPEC_ID, ITEM_TYPE, PCE_ITEM_TYPE, INTERNATIONAL_NAME, NATIVE_NAME, 
+    UI_TEMP_DESC, CREATER, CREATE_DATE, MODIFIER, MODIFY_DATE, DEL_FLAG, STATE, TEMPLATE_TYPE, 
+    REUSE_UI_TEMP_ID, WIDTH, HEIGHT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holmesycl.product.domain.meta.UiTemplateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from META.UI_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from META.UI_TEMPLATE
+    where UI_TEMP_ID = #{uiTempId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from META.UI_TEMPLATE
+    where UI_TEMP_ID = #{uiTempId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holmesycl.product.domain.meta.UiTemplateExample" >
+    delete from META.UI_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holmesycl.product.domain.meta.UiTemplate" >
+    <selectKey resultType="java.lang.Long" keyProperty="uiTempId" order="BEFORE" >
+      SELECT meta.ui_template$seq.nextval FROM dual
+    </selectKey>
+    insert into META.UI_TEMPLATE (UI_TEMP_ID, OBJECT_SPEC_ID, ITEM_TYPE, 
+      PCE_ITEM_TYPE, INTERNATIONAL_NAME, NATIVE_NAME, 
+      UI_TEMP_DESC, CREATER, CREATE_DATE, 
+      MODIFIER, MODIFY_DATE, DEL_FLAG, 
+      STATE, TEMPLATE_TYPE, REUSE_UI_TEMP_ID, 
+      WIDTH, HEIGHT)
+    values (#{uiTempId,jdbcType=DECIMAL}, #{objectSpecId,jdbcType=DECIMAL}, #{itemType,jdbcType=VARCHAR}, 
+      #{pceItemType,jdbcType=VARCHAR}, #{internationalName,jdbcType=VARCHAR}, #{nativeName,jdbcType=VARCHAR}, 
+      #{uiTempDesc,jdbcType=VARCHAR}, #{creater,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=DECIMAL}, #{modifyDate,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=CHAR}, 
+      #{state,jdbcType=VARCHAR}, #{templateType,jdbcType=VARCHAR}, #{reuseUiTempId,jdbcType=DECIMAL}, 
+      #{width,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holmesycl.product.domain.meta.UiTemplate" >
+    <selectKey resultType="java.lang.Long" keyProperty="uiTempId" order="BEFORE" >
+      SELECT meta.ui_template$seq.nextval FROM dual
+    </selectKey>
+    insert into META.UI_TEMPLATE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      UI_TEMP_ID,
+      <if test="objectSpecId != null" >
+        OBJECT_SPEC_ID,
+      </if>
+      <if test="itemType != null" >
+        ITEM_TYPE,
+      </if>
+      <if test="pceItemType != null" >
+        PCE_ITEM_TYPE,
+      </if>
+      <if test="internationalName != null" >
+        INTERNATIONAL_NAME,
+      </if>
+      <if test="nativeName != null" >
+        NATIVE_NAME,
+      </if>
+      <if test="uiTempDesc != null" >
+        UI_TEMP_DESC,
+      </if>
+      <if test="creater != null" >
+        CREATER,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifier != null" >
+        MODIFIER,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="templateType != null" >
+        TEMPLATE_TYPE,
+      </if>
+      <if test="reuseUiTempId != null" >
+        REUSE_UI_TEMP_ID,
+      </if>
+      <if test="width != null" >
+        WIDTH,
+      </if>
+      <if test="height != null" >
+        HEIGHT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{uiTempId,jdbcType=DECIMAL},
+      <if test="objectSpecId != null" >
+        #{objectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="itemType != null" >
+        #{itemType,jdbcType=VARCHAR},
+      </if>
+      <if test="pceItemType != null" >
+        #{pceItemType,jdbcType=VARCHAR},
+      </if>
+      <if test="internationalName != null" >
+        #{internationalName,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeName != null" >
+        #{nativeName,jdbcType=VARCHAR},
+      </if>
+      <if test="uiTempDesc != null" >
+        #{uiTempDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=DECIMAL},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="templateType != null" >
+        #{templateType,jdbcType=VARCHAR},
+      </if>
+      <if test="reuseUiTempId != null" >
+        #{reuseUiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        #{height,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holmesycl.product.domain.meta.UiTemplateExample" resultType="java.lang.Integer" >
+    select count(*) from META.UI_TEMPLATE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update META.UI_TEMPLATE
+    <set >
+      <if test="record.uiTempId != null" >
+        UI_TEMP_ID = #{record.uiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.objectSpecId != null" >
+        OBJECT_SPEC_ID = #{record.objectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.itemType != null" >
+        ITEM_TYPE = #{record.itemType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pceItemType != null" >
+        PCE_ITEM_TYPE = #{record.pceItemType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.internationalName != null" >
+        INTERNATIONAL_NAME = #{record.internationalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativeName != null" >
+        NATIVE_NAME = #{record.nativeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uiTempDesc != null" >
+        UI_TEMP_DESC = #{record.uiTempDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        CREATER = #{record.creater,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null" >
+        MODIFIER = #{record.modifier,jdbcType=DECIMAL},
+      </if>
+      <if test="record.modifyDate != null" >
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null" >
+        DEL_FLAG = #{record.delFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateType != null" >
+        TEMPLATE_TYPE = #{record.templateType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reuseUiTempId != null" >
+        REUSE_UI_TEMP_ID = #{record.reuseUiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.width != null" >
+        WIDTH = #{record.width,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null" >
+        HEIGHT = #{record.height,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update META.UI_TEMPLATE
+    set UI_TEMP_ID = #{record.uiTempId,jdbcType=DECIMAL},
+      OBJECT_SPEC_ID = #{record.objectSpecId,jdbcType=DECIMAL},
+      ITEM_TYPE = #{record.itemType,jdbcType=VARCHAR},
+      PCE_ITEM_TYPE = #{record.pceItemType,jdbcType=VARCHAR},
+      INTERNATIONAL_NAME = #{record.internationalName,jdbcType=VARCHAR},
+      NATIVE_NAME = #{record.nativeName,jdbcType=VARCHAR},
+      UI_TEMP_DESC = #{record.uiTempDesc,jdbcType=VARCHAR},
+      CREATER = #{record.creater,jdbcType=DECIMAL},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      MODIFIER = #{record.modifier,jdbcType=DECIMAL},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      DEL_FLAG = #{record.delFlag,jdbcType=CHAR},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      TEMPLATE_TYPE = #{record.templateType,jdbcType=VARCHAR},
+      REUSE_UI_TEMP_ID = #{record.reuseUiTempId,jdbcType=DECIMAL},
+      WIDTH = #{record.width,jdbcType=VARCHAR},
+      HEIGHT = #{record.height,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holmesycl.product.domain.meta.UiTemplate" >
+    update META.UI_TEMPLATE
+    <set >
+      <if test="objectSpecId != null" >
+        OBJECT_SPEC_ID = #{objectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="itemType != null" >
+        ITEM_TYPE = #{itemType,jdbcType=VARCHAR},
+      </if>
+      <if test="pceItemType != null" >
+        PCE_ITEM_TYPE = #{pceItemType,jdbcType=VARCHAR},
+      </if>
+      <if test="internationalName != null" >
+        INTERNATIONAL_NAME = #{internationalName,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeName != null" >
+        NATIVE_NAME = #{nativeName,jdbcType=VARCHAR},
+      </if>
+      <if test="uiTempDesc != null" >
+        UI_TEMP_DESC = #{uiTempDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        CREATER = #{creater,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        MODIFIER = #{modifier,jdbcType=DECIMAL},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="templateType != null" >
+        TEMPLATE_TYPE = #{templateType,jdbcType=VARCHAR},
+      </if>
+      <if test="reuseUiTempId != null" >
+        REUSE_UI_TEMP_ID = #{reuseUiTempId,jdbcType=DECIMAL},
+      </if>
+      <if test="width != null" >
+        WIDTH = #{width,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null" >
+        HEIGHT = #{height,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UI_TEMP_ID = #{uiTempId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holmesycl.product.domain.meta.UiTemplate" >
+    update META.UI_TEMPLATE
+    set OBJECT_SPEC_ID = #{objectSpecId,jdbcType=DECIMAL},
+      ITEM_TYPE = #{itemType,jdbcType=VARCHAR},
+      PCE_ITEM_TYPE = #{pceItemType,jdbcType=VARCHAR},
+      INTERNATIONAL_NAME = #{internationalName,jdbcType=VARCHAR},
+      NATIVE_NAME = #{nativeName,jdbcType=VARCHAR},
+      UI_TEMP_DESC = #{uiTempDesc,jdbcType=VARCHAR},
+      CREATER = #{creater,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFIER = #{modifier,jdbcType=DECIMAL},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      DEL_FLAG = #{delFlag,jdbcType=CHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      TEMPLATE_TYPE = #{templateType,jdbcType=VARCHAR},
+      REUSE_UI_TEMP_ID = #{reuseUiTempId,jdbcType=DECIMAL},
+      WIDTH = #{width,jdbcType=VARCHAR},
+      HEIGHT = #{height,jdbcType=VARCHAR}
+    where UI_TEMP_ID = #{uiTempId,jdbcType=DECIMAL}
+  </update>
+</mapper>
