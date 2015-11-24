@@ -22,13 +22,6 @@
     <![endif]-->
   </head>
   <body>
-  	<button type="button" class="btn btn-default" aria-label="Left Align">
-  <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-</button>
-
-<button type="button" class="btn btn-default btn-lg">
-  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
-</button>
 
 <i class="icon-camera-retro"></i> icon-camera-retro
     <div class="container-fluid">
@@ -47,50 +40,12 @@
     <script src="${contextPath }/static/js/lib/bootstrap-treeview.js"></script>
     
     <script type="text/javascript">
-    
-    	function getTree() {
-    	  // Some logic to retrieve, or generate tree structure
-    	  var tree = [
-			  {
-			    text: "Parent 1",
-			    nodes: [
-			      {
-			        text: "Child 1",
-			        icon: "glyphicon glyphicon-stop",
-			        selectedIcon: "glyphicon glyphicon-stop",
-			        color: "#000000",
-			        backColor: "#FFFFFF",
-			        nodes: [
-			          {
-			            text: "Grandchild 1"
-			          },
-			          {
-			            text: "Grandchild 2"
-			          }
-			        ]
-			      },
-			      {
-			        text: "Child 2"
-			      }
-			    ]
-			  },
-			  {
-			    text: "Parent 2"
-			  },
-			  {
-			    text: "Parent 3"
-			  },
-			  {
-			    text: "Parent 4"
-			  },
-			  {
-			    text: "Parent 5"
-			  }
-			];
-    	  return tree;
-    	}
-
-    	$('#tree').treeview({data: getTree()});
+    	
+    	var baseUrl = "${contextPath }/ui/template";
+    	
+		$.get(baseUrl + "/tree?name=hello",function(data){
+			$('#tree').treeview({data: data});
+    	});
     
     </script>
   </body>
