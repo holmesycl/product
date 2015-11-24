@@ -11,6 +11,9 @@
     <link href="${contextPath }/static/Flat-UI/css/vendor/bootstrap.min.css" rel="stylesheet">
     <!-- Loading Flat UI -->
     <link href="${contextPath }/static/Flat-UI/css/flat-ui.min.css" rel="stylesheet">
+    
+    <link href="${contextPath }/static/Font-Awesome/css/font-awesome.min.css" rel="stylesheet">
+    
     <link rel="shortcut icon" href="${contextPath }/static/Flat-UI/img/favicon.ico">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
@@ -19,7 +22,15 @@
     <![endif]-->
   </head>
   <body>
-  	
+  	<button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+</button>
+
+<button type="button" class="btn btn-default btn-lg">
+  <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+</button>
+
+<i class="icon-camera-retro"></i> icon-camera-retro
     <div class="container-fluid">
     	<div class="row">
     		<div class="col-md-6">
