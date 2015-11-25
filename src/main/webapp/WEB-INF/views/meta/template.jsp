@@ -14,6 +14,8 @@
     
     <link href="${contextPath }/static/Font-Awesome/css/font-awesome.min.css" rel="stylesheet">
     
+    <link href="${contextPath }/static/showloading/css/loading.css" rel="stylesheet">
+    
     <link rel="shortcut icon" href="${contextPath }/static/Flat-UI/img/favicon.ico">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
@@ -23,7 +25,7 @@
   </head>
   <body>
 
-    <div class="container">
+    <div class="container" style="height: 1px;">
     	<div class="row">
     		<div class="col-md-6">
     			<div id="tree"></div>
@@ -37,9 +39,11 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="${contextPath }/static/Flat-UI/js/flat-ui.min.js"></script>
     <script src="${contextPath }/static/js/lib/bootstrap-treeview.js"></script>
+    <script src="${contextPath }/static/showloading/js/loading.js"></script>
+    
     
     <script type="text/javascript">
-    	
+		
     	var baseUrl = "${contextPath }/ui/template";
     	
 		$.get(baseUrl + "/tree?name=策划",function(data){
