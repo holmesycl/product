@@ -23,8 +23,7 @@
   </head>
   <body>
 
-<i class="icon-camera-retro"></i> icon-camera-retro
-    <div class="container-fluid">
+    <div class="container">
     	<div class="row">
     		<div class="col-md-6">
     			<div id="tree"></div>
@@ -43,7 +42,7 @@
     	
     	var baseUrl = "${contextPath }/ui/template";
     	
-		$.get(baseUrl + "/tree?name=hello",function(data){
+		$.get(baseUrl + "/tree?name=策划",function(data){
 			$('#tree').treeview({data: data});
     	});
     

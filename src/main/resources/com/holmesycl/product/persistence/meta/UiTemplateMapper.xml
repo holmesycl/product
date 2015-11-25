@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.holmesycl.product.persistence.meta.UiTemplateMapper" >
+
+  <cache />
+  
   <resultMap id="BaseResultMap" type="com.holmesycl.product.domain.meta.UiTemplate" >
     <id column="UI_TEMP_ID" property="uiTempId" jdbcType="DECIMAL" />
     <result column="OBJECT_SPEC_ID" property="objectSpecId" jdbcType="DECIMAL" />
