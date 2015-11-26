@@ -52,9 +52,9 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		
-		<table schema="meta" tableName="ui_component">
-			<generatedKey column="ui_component_id"
-				sqlStatement="SELECT meta.ui_component$seq.nextval FROM dual" />
+		<table schema="meta" tableName="meta_attr_spec">
+			<generatedKey column="attr_id"
+				sqlStatement="SELECT meta.meta_attr_spec$seq.nextval FROM dual" />
 		</table>
 	</context>
 </generatorConfiguration>

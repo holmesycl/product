@@ -25,10 +25,24 @@
   </head>
   <body>
 
-    <div class="container" style="height: 1px;">
+    <div class="container">
     	<div class="row">
     		<div class="col-md-6">
-    			<div id="tree"></div>
+    			<div class="row">
+    				<div class="col-md-12">
+    					<form class="form-inline" role="search" style="margin: 20px 0 20px 0;">
+					  		<div class="form-group">
+					    		<input name="searchText" type="text" class="form-control" placeholder="Search">
+					  		</div>
+					  		<button type="submit" class="btn btn-primary">搜索</button>
+						</form>
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="col-md-12">
+    					<div id="tree"></div>
+    				</div>
+    			</div>
     		</div>
     	</div>
   	</div>
@@ -44,12 +58,34 @@
     
     <script type="text/javascript">
 		
-    	var baseUrl = "${contextPath }/ui/template";
-    	
-		$.get(baseUrl + "/tree?name=策划",function(data){
-			$('#tree').treeview({data: data});
-    	});
-    
+    	(function($){
+    		
+    		var baseUrl = "${contextPath }/ui/template";
+    		
+    		var options = {
+   	   			levels: 1,
+   				collapseIcon: 'icon-folder-open-alt',
+   				expandIcon: 'icon-folder-close-alt',
+   				emptyIcon: 'icon-file-alt',
+   				showTags: true,
+   				onNodeSelected: function(event, node) {
+   					alert(JSON.stringify(node));
+   				}
+   	    	}
+    		
+    		$("form:first").submit(function(event){
+    			$(this).showLoading();
+    			event.preventDefault();
+    			var searchText = $('input[name="searchText"]').val();
+    			$.post(baseUrl + "/tree",{name: searchText},function(data){
+    				options.data = data;
+    				$('#tree').treeview(options);
+    				$(this).hideLoading();
+    	    	});
+    		});
+    		
+    	})(jQuery);
+
     </script>
   </body>
 </html>

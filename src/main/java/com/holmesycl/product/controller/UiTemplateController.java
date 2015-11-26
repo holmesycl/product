@@ -27,7 +27,6 @@ public class UiTemplateController {
 	@ResponseBody
 	public List<TreeNode> findTreeByName(String name) {
 		List<TreeNode> treeNodes = new ArrayList<TreeNode>();
-		name = "";
 		treeNodes = uiTemplateService.findTemplateTreeByName(name);
 		return treeNodes;
 	}

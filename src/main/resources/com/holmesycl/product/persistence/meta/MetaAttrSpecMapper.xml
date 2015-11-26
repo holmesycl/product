@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holmesycl.product.persistence.meta.MetaAttrSpecMapper" >
+  <resultMap id="BaseResultMap" type="com.holmesycl.product.domain.meta.MetaAttrSpec" >
+    <id column="ATTR_ID" property="attrId" jdbcType="DECIMAL" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="OBJECT_SPEC_ID" property="objectSpecId" jdbcType="DECIMAL" />
+    <result column="DATA_TYPE" property="dataType" jdbcType="VARCHAR" />
+    <result column="REF_OBJECT_SPEC_ID" property="refObjectSpecId" jdbcType="DECIMAL" />
+    <result column="IS_NULL" property="isNull" jdbcType="CHAR" />
+    <result column="IS_MEMORY" property="isMemory" jdbcType="CHAR" />
+    <result column="GET_VALUES_INTF" property="getValuesIntf" jdbcType="VARCHAR" />
+    <result column="PARAMS" property="params" jdbcType="VARCHAR" />
+    <result column="DEFAULT_VALUE" property="defaultValue" jdbcType="VARCHAR" />
+    <result column="ATTR_LENGTH" property="attrLength" jdbcType="DECIMAL" />
+    <result column="IS_UNIQUE" property="isUnique" jdbcType="CHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="CREATER" property="creater" jdbcType="DECIMAL" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFIER" property="modifier" jdbcType="DECIMAL" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="DEL_FLAG" property="delFlag" jdbcType="CHAR" />
+    <result column="SHOW_FORMAT" property="showFormat" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="DISPLAY_ATTR" property="displayAttr" jdbcType="VARCHAR" />
+    <result column="ORDER_SEQ" property="orderSeq" jdbcType="DECIMAL" />
+    <result column="DEF_COMP_TYPE" property="defCompType" jdbcType="VARCHAR" />
+    <result column="REGEXP" property="regexp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ATTR_ID, CODE, NAME, OBJECT_SPEC_ID, DATA_TYPE, REF_OBJECT_SPEC_ID, IS_NULL, IS_MEMORY, 
+    GET_VALUES_INTF, PARAMS, DEFAULT_VALUE, ATTR_LENGTH, IS_UNIQUE, STATE, CREATER, CREATE_DATE, 
+    MODIFIER, MODIFY_DATE, DEL_FLAG, SHOW_FORMAT, REMARK, DISPLAY_ATTR, ORDER_SEQ, DEF_COMP_TYPE, 
+    REGEXP
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holmesycl.product.domain.meta.MetaAttrSpecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from META.META_ATTR_SPEC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from META.META_ATTR_SPEC
+    where ATTR_ID = #{attrId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from META.META_ATTR_SPEC
+    where ATTR_ID = #{attrId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holmesycl.product.domain.meta.MetaAttrSpecExample" >
+    delete from META.META_ATTR_SPEC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holmesycl.product.domain.meta.MetaAttrSpec" >
+    <selectKey resultType="java.lang.Long" keyProperty="attrId" order="BEFORE" >
+      SELECT meta.meta_attr_spec$seq.nextval FROM dual
+    </selectKey>
+    insert into META.META_ATTR_SPEC (ATTR_ID, CODE, NAME, 
+      OBJECT_SPEC_ID, DATA_TYPE, REF_OBJECT_SPEC_ID, 
+      IS_NULL, IS_MEMORY, GET_VALUES_INTF, 
+      PARAMS, DEFAULT_VALUE, ATTR_LENGTH, 
+      IS_UNIQUE, STATE, CREATER, 
+      CREATE_DATE, MODIFIER, MODIFY_DATE, 
+      DEL_FLAG, SHOW_FORMAT, REMARK, 
+      DISPLAY_ATTR, ORDER_SEQ, DEF_COMP_TYPE, 
+      REGEXP)
+    values (#{attrId,jdbcType=DECIMAL}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{objectSpecId,jdbcType=DECIMAL}, #{dataType,jdbcType=VARCHAR}, #{refObjectSpecId,jdbcType=DECIMAL}, 
+      #{isNull,jdbcType=CHAR}, #{isMemory,jdbcType=CHAR}, #{getValuesIntf,jdbcType=VARCHAR}, 
+      #{params,jdbcType=VARCHAR}, #{defaultValue,jdbcType=VARCHAR}, #{attrLength,jdbcType=DECIMAL}, 
+      #{isUnique,jdbcType=CHAR}, #{state,jdbcType=VARCHAR}, #{creater,jdbcType=DECIMAL}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifier,jdbcType=DECIMAL}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{delFlag,jdbcType=CHAR}, #{showFormat,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{displayAttr,jdbcType=VARCHAR}, #{orderSeq,jdbcType=DECIMAL}, #{defCompType,jdbcType=VARCHAR}, 
+      #{regexp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holmesycl.product.domain.meta.MetaAttrSpec" >
+    <selectKey resultType="java.lang.Long" keyProperty="attrId" order="BEFORE" >
+      SELECT meta.meta_attr_spec$seq.nextval FROM dual
+    </selectKey>
+    insert into META.META_ATTR_SPEC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ATTR_ID,
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="objectSpecId != null" >
+        OBJECT_SPEC_ID,
+      </if>
+      <if test="dataType != null" >
+        DATA_TYPE,
+      </if>
+      <if test="refObjectSpecId != null" >
+        REF_OBJECT_SPEC_ID,
+      </if>
+      <if test="isNull != null" >
+        IS_NULL,
+      </if>
+      <if test="isMemory != null" >
+        IS_MEMORY,
+      </if>
+      <if test="getValuesIntf != null" >
+        GET_VALUES_INTF,
+      </if>
+      <if test="params != null" >
+        PARAMS,
+      </if>
+      <if test="defaultValue != null" >
+        DEFAULT_VALUE,
+      </if>
+      <if test="attrLength != null" >
+        ATTR_LENGTH,
+      </if>
+      <if test="isUnique != null" >
+        IS_UNIQUE,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="creater != null" >
+        CREATER,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifier != null" >
+        MODIFIER,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG,
+      </if>
+      <if test="showFormat != null" >
+        SHOW_FORMAT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="displayAttr != null" >
+        DISPLAY_ATTR,
+      </if>
+      <if test="orderSeq != null" >
+        ORDER_SEQ,
+      </if>
+      <if test="defCompType != null" >
+        DEF_COMP_TYPE,
+      </if>
+      <if test="regexp != null" >
+        REGEXP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{attrId,jdbcType=DECIMAL},
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="objectSpecId != null" >
+        #{objectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="dataType != null" >
+        #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="refObjectSpecId != null" >
+        #{refObjectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="isNull != null" >
+        #{isNull,jdbcType=CHAR},
+      </if>
+      <if test="isMemory != null" >
+        #{isMemory,jdbcType=CHAR},
+      </if>
+      <if test="getValuesIntf != null" >
+        #{getValuesIntf,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null" >
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultValue != null" >
+        #{defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="attrLength != null" >
+        #{attrLength,jdbcType=DECIMAL},
+      </if>
+      <if test="isUnique != null" >
+        #{isUnique,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=DECIMAL},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="showFormat != null" >
+        #{showFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="displayAttr != null" >
+        #{displayAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSeq != null" >
+        #{orderSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="defCompType != null" >
+        #{defCompType,jdbcType=VARCHAR},
+      </if>
+      <if test="regexp != null" >
+        #{regexp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holmesycl.product.domain.meta.MetaAttrSpecExample" resultType="java.lang.Integer" >
+    select count(*) from META.META_ATTR_SPEC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update META.META_ATTR_SPEC
+    <set >
+      <if test="record.attrId != null" >
+        ATTR_ID = #{record.attrId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.code != null" >
+        CODE = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.objectSpecId != null" >
+        OBJECT_SPEC_ID = #{record.objectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dataType != null" >
+        DATA_TYPE = #{record.dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refObjectSpecId != null" >
+        REF_OBJECT_SPEC_ID = #{record.refObjectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isNull != null" >
+        IS_NULL = #{record.isNull,jdbcType=CHAR},
+      </if>
+      <if test="record.isMemory != null" >
+        IS_MEMORY = #{record.isMemory,jdbcType=CHAR},
+      </if>
+      <if test="record.getValuesIntf != null" >
+        GET_VALUES_INTF = #{record.getValuesIntf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.params != null" >
+        PARAMS = #{record.params,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultValue != null" >
+        DEFAULT_VALUE = #{record.defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrLength != null" >
+        ATTR_LENGTH = #{record.attrLength,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isUnique != null" >
+        IS_UNIQUE = #{record.isUnique,jdbcType=CHAR},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creater != null" >
+        CREATER = #{record.creater,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null" >
+        MODIFIER = #{record.modifier,jdbcType=DECIMAL},
+      </if>
+      <if test="record.modifyDate != null" >
+        MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null" >
+        DEL_FLAG = #{record.delFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.showFormat != null" >
+        SHOW_FORMAT = #{record.showFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displayAttr != null" >
+        DISPLAY_ATTR = #{record.displayAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderSeq != null" >
+        ORDER_SEQ = #{record.orderSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.defCompType != null" >
+        DEF_COMP_TYPE = #{record.defCompType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regexp != null" >
+        REGEXP = #{record.regexp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update META.META_ATTR_SPEC
+    set ATTR_ID = #{record.attrId,jdbcType=DECIMAL},
+      CODE = #{record.code,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      OBJECT_SPEC_ID = #{record.objectSpecId,jdbcType=DECIMAL},
+      DATA_TYPE = #{record.dataType,jdbcType=VARCHAR},
+      REF_OBJECT_SPEC_ID = #{record.refObjectSpecId,jdbcType=DECIMAL},
+      IS_NULL = #{record.isNull,jdbcType=CHAR},
+      IS_MEMORY = #{record.isMemory,jdbcType=CHAR},
+      GET_VALUES_INTF = #{record.getValuesIntf,jdbcType=VARCHAR},
+      PARAMS = #{record.params,jdbcType=VARCHAR},
+      DEFAULT_VALUE = #{record.defaultValue,jdbcType=VARCHAR},
+      ATTR_LENGTH = #{record.attrLength,jdbcType=DECIMAL},
+      IS_UNIQUE = #{record.isUnique,jdbcType=CHAR},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      CREATER = #{record.creater,jdbcType=DECIMAL},
+      CREATE_DATE = #{record.createDate,jdbcType=TIMESTAMP},
+      MODIFIER = #{record.modifier,jdbcType=DECIMAL},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=TIMESTAMP},
+      DEL_FLAG = #{record.delFlag,jdbcType=CHAR},
+      SHOW_FORMAT = #{record.showFormat,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      DISPLAY_ATTR = #{record.displayAttr,jdbcType=VARCHAR},
+      ORDER_SEQ = #{record.orderSeq,jdbcType=DECIMAL},
+      DEF_COMP_TYPE = #{record.defCompType,jdbcType=VARCHAR},
+      REGEXP = #{record.regexp,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holmesycl.product.domain.meta.MetaAttrSpec" >
+    update META.META_ATTR_SPEC
+    <set >
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="objectSpecId != null" >
+        OBJECT_SPEC_ID = #{objectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="dataType != null" >
+        DATA_TYPE = #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="refObjectSpecId != null" >
+        REF_OBJECT_SPEC_ID = #{refObjectSpecId,jdbcType=DECIMAL},
+      </if>
+      <if test="isNull != null" >
+        IS_NULL = #{isNull,jdbcType=CHAR},
+      </if>
+      <if test="isMemory != null" >
+        IS_MEMORY = #{isMemory,jdbcType=CHAR},
+      </if>
+      <if test="getValuesIntf != null" >
+        GET_VALUES_INTF = #{getValuesIntf,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null" >
+        PARAMS = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultValue != null" >
+        DEFAULT_VALUE = #{defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="attrLength != null" >
+        ATTR_LENGTH = #{attrLength,jdbcType=DECIMAL},
+      </if>
+      <if test="isUnique != null" >
+        IS_UNIQUE = #{isUnique,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null" >
+        CREATER = #{creater,jdbcType=DECIMAL},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        MODIFIER = #{modifier,jdbcType=DECIMAL},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        DEL_FLAG = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="showFormat != null" >
+        SHOW_FORMAT = #{showFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="displayAttr != null" >
+        DISPLAY_ATTR = #{displayAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSeq != null" >
+        ORDER_SEQ = #{orderSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="defCompType != null" >
+        DEF_COMP_TYPE = #{defCompType,jdbcType=VARCHAR},
+      </if>
+      <if test="regexp != null" >
+        REGEXP = #{regexp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATTR_ID = #{attrId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holmesycl.product.domain.meta.MetaAttrSpec" >
+    update META.META_ATTR_SPEC
+    set CODE = #{code,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      OBJECT_SPEC_ID = #{objectSpecId,jdbcType=DECIMAL},
+      DATA_TYPE = #{dataType,jdbcType=VARCHAR},
+      REF_OBJECT_SPEC_ID = #{refObjectSpecId,jdbcType=DECIMAL},
+      IS_NULL = #{isNull,jdbcType=CHAR},
+      IS_MEMORY = #{isMemory,jdbcType=CHAR},
+      GET_VALUES_INTF = #{getValuesIntf,jdbcType=VARCHAR},
+      PARAMS = #{params,jdbcType=VARCHAR},
+      DEFAULT_VALUE = #{defaultValue,jdbcType=VARCHAR},
+      ATTR_LENGTH = #{attrLength,jdbcType=DECIMAL},
+      IS_UNIQUE = #{isUnique,jdbcType=CHAR},
+      STATE = #{state,jdbcType=VARCHAR},
+      CREATER = #{creater,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFIER = #{modifier,jdbcType=DECIMAL},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      DEL_FLAG = #{delFlag,jdbcType=CHAR},
+      SHOW_FORMAT = #{showFormat,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DISPLAY_ATTR = #{displayAttr,jdbcType=VARCHAR},
+      ORDER_SEQ = #{orderSeq,jdbcType=DECIMAL},
+      DEF_COMP_TYPE = #{defCompType,jdbcType=VARCHAR},
+      REGEXP = #{regexp,jdbcType=VARCHAR}
+    where ATTR_ID = #{attrId,jdbcType=DECIMAL}
+  </update>
+</mapper>
