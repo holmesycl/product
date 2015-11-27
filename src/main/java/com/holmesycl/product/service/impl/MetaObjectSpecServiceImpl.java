@@ -19,6 +19,7 @@ import com.holmesycl.product.persistence.meta.MetaAttrSpecMapper;
 import com.holmesycl.product.persistence.meta.MetaObjectSpecMapper;
 import com.holmesycl.product.service.MetaObjectSpecService;
 import com.holmesycl.product.util.PageParam;
+import com.holmesycl.product.util.SqlUtil;
 import com.holmesycl.product.util.TagsUtil;
 
 @Service("metaObjectSpecService")
@@ -40,7 +41,7 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 		PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize());
 		MetaObjectSpecExample metaObjectSpecExample = new MetaObjectSpecExample();
 		if (StringUtils.isNotBlank(query)) {
-			metaObjectSpecExample.createCriteria().andObjectSpecNameLike("%" + query + "%");
+			metaObjectSpecExample.createCriteria().andObjectSpecNameLike(SqlUtil.bothLike(query));
 		} else {
 			metaObjectSpecExample.createCriteria().andObjectSpecCodeIsNotNull();
 		}
@@ -67,7 +68,8 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 		for (MetaAttrSpec attrSpec : attrSpecs) {
 			TreeNode treeNode = new TreeNode();
 			treeNode.setText(attrSpec.getName());
-			treeNode.setTags(TagsUtil.createTags(attrSpec.getCode()));
+			treeNode.setValue(attrSpec.getAttrId().toString());
+			treeNode.setTags(TagsUtil.createTags(attrSpec.getAttrId().toString(), attrSpec.getCode()));
 			treeNodes.add(treeNode);
 		}
 		return treeNodes;
@@ -83,13 +85,14 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 	private TreeNode createTreeNode(MetaObjectSpec objectSpec) {
 		TreeNode treeNode = new TreeNode();
 		treeNode.setText(objectSpec.getObjectSpecName());
-		treeNode.setTags(TagsUtil.createTags(objectSpec.getObjectSpecCode()));
+		treeNode.setValue(objectSpec.getObjectSpecId().toString());
+		treeNode.setTags(TagsUtil.createTags(objectSpec.getObjectSpecId().toString(), objectSpec.getObjectSpecCode()));
 		return treeNode;
 	}
 
 	private List<MetaObjectSpec> findByName(String name) {
 		MetaObjectSpecExample objectSpecExample = new MetaObjectSpecExample();
-		objectSpecExample.createCriteria().andObjectSpecNameLike("%" + name + "%");
+		objectSpecExample.createCriteria().andObjectSpecNameLike(SqlUtil.bothLike(name));
 		List<MetaObjectSpec> objectSpecs = metaObjectSpecMapper.selectByExample(objectSpecExample);
 		return objectSpecs;
 	}

@@ -23,6 +23,11 @@ public class TreeNode implements Serializable {
 	private String text;
 
 	/**
+	 * 节点值
+	 */
+	private String value;
+
+	/**
 	 * The icon displayed on a given node, typically to the left of the text.
 	 */
 	private String icon;
@@ -209,4 +214,11 @@ public class TreeNode implements Serializable {
 		this.nodes = nodes;
 	}
 
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
 }

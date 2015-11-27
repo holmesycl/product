@@ -4,7 +4,7 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
-    <title>对象</title>
+    <title>数据库表</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Loading Bootstrap -->
@@ -27,28 +27,20 @@
 
     <div class="container">
     	<div class="row">
-  			<div class="col-md-12">
-  				<form class="form-inline" role="search" style="margin: 20px 0 20px 0;">
-			  		<div class="form-group">
-			    		<input name="searchText" type="text" class="form-control" placeholder="Search">
-			  		</div>
-			  		<button type="submit" class="btn btn-primary">搜索</button>
-				</form>
-  			</div>
-  		</div>
-    	<div class="row">
     		<div class="col-md-6">
     			<div class="row">
     				<div class="col-md-12">
-    					<div id="objTree"></div>
+    					<form class="form-inline" role="search" style="margin: 20px 0 20px 0;">
+					  		<div class="form-group">
+					    		<input name="searchText" type="text" class="form-control" placeholder="value/table">
+					  		</div>
+					  		<button type="submit" class="btn btn-primary">搜索</button>
+						</form>
     				</div>
     			</div>
-    		</div>
-    		
-    		<div class="col-md-6">
     			<div class="row">
     				<div class="col-md-12">
-    					<div id="valTree"></div>
+    					<div id="tree"></div>
     				</div>
     			</div>
     		</div>
@@ -68,51 +60,26 @@
 		
     	(function($){
     		
-    		var objUrl = "${contextPath }/meta/object";
-    		
-    		var valUrl = "${contextPath }/meta/ivalue/";
+    		var baseUrl = "${contextPath }/meta/ivalue/";
     		
     		var options = {
+   	   			levels: 1,
    				collapseIcon: 'icon-folder-open-alt',
    				expandIcon: 'icon-folder-close-alt',
    				emptyIcon: 'icon-file-alt',
    				showTags: true,
-   	    	}
-    		
-    		var valOptions = {
-        		levels: 2
-        	}
-			valOptions = $.extend(valOptions, options);
-    		
-    		var objOptions = {
-    			levels: 1,
    				onNodeSelected: function(event, node) {
-   					console.log(node);
-   					$('#valTree').treeview('remove');
-   					if(!node.nodes){
-   		  				$('#objTree').showLoading();
-   		  				$.post(valUrl + "/tree/attr",{attrId: node.value},function(data){
-   		  					valOptions.data = data;
-   		  	    			$('#valTree').treeview(valOptions);
-   		  	    			$('#objTree').hideLoading();
-   		  	    			// 滚动到顶部
-   		  	    			$('html,body').animate({scrollTop: 0},1000);
-   		  	    	 	});
-   					}
+   					
    				}
-    		};
-    		
-    		objOptions = $.extend(objOptions, options);
-    		
+   	    	}
     		
     		$("form:first").submit(function(event){
     			$(this).showLoading();
     			event.preventDefault();
     			var searchText = $('input[name="searchText"]').val();
-    			$.post(objUrl + "/tree",{name: searchText},function(data){
-    				objOptions.data = data;
-    				$('#objTree').treeview(objOptions);
-    				$('#valTree').treeview('remove');
+    			$.post(baseUrl + "/tree",{name: searchText},function(data){
+    				options.data = data;
+    				$('#tree').treeview(options);
     				$(this).hideLoading();
     	    	});
     		});
