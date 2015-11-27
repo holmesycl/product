@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holmesycl.product.persistence.meta.MetaIvalueMapper" >
+  <resultMap id="BaseResultMap" type="com.holmesycl.product.domain.meta.MetaIvalue" >
+    <id column="VALUE_ID" property="valueId" jdbcType="DECIMAL" />
+    <result column="CLASS_PATH" property="classPath" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="SORT_BY" property="sortBy" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    VALUE_ID, CLASS_PATH, REMARK, SORT_BY
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holmesycl.product.domain.meta.MetaIvalueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from META.META_IVALUE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from META.META_IVALUE
+    where VALUE_ID = #{valueId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from META.META_IVALUE
+    where VALUE_ID = #{valueId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holmesycl.product.domain.meta.MetaIvalueExample" >
+    delete from META.META_IVALUE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holmesycl.product.domain.meta.MetaIvalue" >
+    <selectKey resultType="java.lang.Long" keyProperty="valueId" order="BEFORE" >
+      SELECT meta.meta_ivalue$seq.nextval FROM dual
+    </selectKey>
+    insert into META.META_IVALUE (VALUE_ID, CLASS_PATH, REMARK, 
+      SORT_BY)
+    values (#{valueId,jdbcType=DECIMAL}, #{classPath,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{sortBy,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holmesycl.product.domain.meta.MetaIvalue" >
+    <selectKey resultType="java.lang.Long" keyProperty="valueId" order="BEFORE" >
+      SELECT meta.meta_ivalue$seq.nextval FROM dual
+    </selectKey>
+    insert into META.META_IVALUE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      VALUE_ID,
+      <if test="classPath != null" >
+        CLASS_PATH,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="sortBy != null" >
+        SORT_BY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{valueId,jdbcType=DECIMAL},
+      <if test="classPath != null" >
+        #{classPath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sortBy != null" >
+        #{sortBy,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holmesycl.product.domain.meta.MetaIvalueExample" resultType="java.lang.Integer" >
+    select count(*) from META.META_IVALUE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update META.META_IVALUE
+    <set >
+      <if test="record.valueId != null" >
+        VALUE_ID = #{record.valueId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.classPath != null" >
+        CLASS_PATH = #{record.classPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortBy != null" >
+        SORT_BY = #{record.sortBy,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update META.META_IVALUE
+    set VALUE_ID = #{record.valueId,jdbcType=DECIMAL},
+      CLASS_PATH = #{record.classPath,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      SORT_BY = #{record.sortBy,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holmesycl.product.domain.meta.MetaIvalue" >
+    update META.META_IVALUE
+    <set >
+      <if test="classPath != null" >
+        CLASS_PATH = #{classPath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sortBy != null" >
+        SORT_BY = #{sortBy,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where VALUE_ID = #{valueId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holmesycl.product.domain.meta.MetaIvalue" >
+    update META.META_IVALUE
+    set CLASS_PATH = #{classPath,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      SORT_BY = #{sortBy,jdbcType=DECIMAL}
+    where VALUE_ID = #{valueId,jdbcType=DECIMAL}
+  </update>
+</mapper>

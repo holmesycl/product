@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holmesycl.product.persistence.meta.MetaIvalueAttrMapper" >
+  <resultMap id="BaseResultMap" type="com.holmesycl.product.domain.meta.MetaIvalueAttr" >
+    <id column="MAPPING_ATTR_ID" property="mappingAttrId" jdbcType="DECIMAL" />
+    <result column="VALUE_ID" property="valueId" jdbcType="DECIMAL" />
+    <result column="PROJECT_CODE" property="projectCode" jdbcType="DECIMAL" />
+    <result column="ATTR_NAME" property="attrName" jdbcType="VARCHAR" />
+    <result column="ATTR_CODE" property="attrCode" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MAPPING_ATTR_ID, VALUE_ID, PROJECT_CODE, ATTR_NAME, ATTR_CODE, STATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holmesycl.product.domain.meta.MetaIvalueAttrExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from META.META_IVALUE_ATTR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from META.META_IVALUE_ATTR
+    where MAPPING_ATTR_ID = #{mappingAttrId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from META.META_IVALUE_ATTR
+    where MAPPING_ATTR_ID = #{mappingAttrId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holmesycl.product.domain.meta.MetaIvalueAttrExample" >
+    delete from META.META_IVALUE_ATTR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holmesycl.product.domain.meta.MetaIvalueAttr" >
+    <selectKey resultType="java.lang.Long" keyProperty="mappingAttrId" order="BEFORE" >
+      SELECT meta.meta_ivalue_attr$seq.nextval FROM dual
+    </selectKey>
+    insert into META.META_IVALUE_ATTR (MAPPING_ATTR_ID, VALUE_ID, PROJECT_CODE, 
+      ATTR_NAME, ATTR_CODE, STATE
+      )
+    values (#{mappingAttrId,jdbcType=DECIMAL}, #{valueId,jdbcType=DECIMAL}, #{projectCode,jdbcType=DECIMAL}, 
+      #{attrName,jdbcType=VARCHAR}, #{attrCode,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.holmesycl.product.domain.meta.MetaIvalueAttr" >
+    <selectKey resultType="java.lang.Long" keyProperty="mappingAttrId" order="BEFORE" >
+      SELECT meta.meta_ivalue_attr$seq.nextval FROM dual
+    </selectKey>
+    insert into META.META_IVALUE_ATTR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      MAPPING_ATTR_ID,
+      <if test="valueId != null" >
+        VALUE_ID,
+      </if>
+      <if test="projectCode != null" >
+        PROJECT_CODE,
+      </if>
+      <if test="attrName != null" >
+        ATTR_NAME,
+      </if>
+      <if test="attrCode != null" >
+        ATTR_CODE,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{mappingAttrId,jdbcType=DECIMAL},
+      <if test="valueId != null" >
+        #{valueId,jdbcType=DECIMAL},
+      </if>
+      <if test="projectCode != null" >
+        #{projectCode,jdbcType=DECIMAL},
+      </if>
+      <if test="attrName != null" >
+        #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrCode != null" >
+        #{attrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holmesycl.product.domain.meta.MetaIvalueAttrExample" resultType="java.lang.Integer" >
+    select count(*) from META.META_IVALUE_ATTR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update META.META_IVALUE_ATTR
+    <set >
+      <if test="record.mappingAttrId != null" >
+        MAPPING_ATTR_ID = #{record.mappingAttrId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.valueId != null" >
+        VALUE_ID = #{record.valueId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.projectCode != null" >
+        PROJECT_CODE = #{record.projectCode,jdbcType=DECIMAL},
+      </if>
+      <if test="record.attrName != null" >
+        ATTR_NAME = #{record.attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrCode != null" >
+        ATTR_CODE = #{record.attrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update META.META_IVALUE_ATTR
+    set MAPPING_ATTR_ID = #{record.mappingAttrId,jdbcType=DECIMAL},
+      VALUE_ID = #{record.valueId,jdbcType=DECIMAL},
+      PROJECT_CODE = #{record.projectCode,jdbcType=DECIMAL},
+      ATTR_NAME = #{record.attrName,jdbcType=VARCHAR},
+      ATTR_CODE = #{record.attrCode,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holmesycl.product.domain.meta.MetaIvalueAttr" >
+    update META.META_IVALUE_ATTR
+    <set >
+      <if test="valueId != null" >
+        VALUE_ID = #{valueId,jdbcType=DECIMAL},
+      </if>
+      <if test="projectCode != null" >
+        PROJECT_CODE = #{projectCode,jdbcType=DECIMAL},
+      </if>
+      <if test="attrName != null" >
+        ATTR_NAME = #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="attrCode != null" >
+        ATTR_CODE = #{attrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MAPPING_ATTR_ID = #{mappingAttrId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holmesycl.product.domain.meta.MetaIvalueAttr" >
+    update META.META_IVALUE_ATTR
+    set VALUE_ID = #{valueId,jdbcType=DECIMAL},
+      PROJECT_CODE = #{projectCode,jdbcType=DECIMAL},
+      ATTR_NAME = #{attrName,jdbcType=VARCHAR},
+      ATTR_CODE = #{attrCode,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=VARCHAR}
+    where MAPPING_ATTR_ID = #{mappingAttrId,jdbcType=DECIMAL}
+  </update>
+</mapper>
