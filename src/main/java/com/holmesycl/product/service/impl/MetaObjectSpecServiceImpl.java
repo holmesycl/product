@@ -69,7 +69,7 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 			TreeNode treeNode = new TreeNode();
 			treeNode.setText(attrSpec.getName());
 			treeNode.setValue(attrSpec.getAttrId().toString());
-			treeNode.setTags(TagsUtil.createTags(attrSpec.getAttrId().toString(), attrSpec.getCode()));
+			treeNode.setTags(TagsUtil.createTags(attrSpec.getAttrId().toString(), attrSpec.getDataType()));
 			treeNodes.add(treeNode);
 		}
 		return treeNodes;
@@ -86,7 +86,7 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 		TreeNode treeNode = new TreeNode();
 		treeNode.setText(objectSpec.getObjectSpecName());
 		treeNode.setValue(objectSpec.getObjectSpecId().toString());
-		treeNode.setTags(TagsUtil.createTags(objectSpec.getObjectSpecId().toString(), objectSpec.getObjectSpecCode()));
+		treeNode.setTags(TagsUtil.createTags(objectSpec.getObjectSpecId().toString()));
 		return treeNode;
 	}
 

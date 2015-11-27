@@ -46,7 +46,7 @@ public class UiTemplateServiceImpl implements UiTemplateService {
 		for (UiComponent component : components) {
 			TreeNode treeNode = new TreeNode();
 			treeNode.setText(component.getNativeName());
-			treeNode.setTags(TagsUtil.createTags(ComponentType.createByOrginName(component.getCompType()).toLocalString()));
+			treeNode.setTags(TagsUtil.createTags(component.getUiComponentId().toString(), ComponentType.createByOrginName(component.getCompType()).toLocalString()));
 			List<UiComponent> childComponents = findByParent(component.getUiComponentId());
 			if (childComponents != null && childComponents.size() > 0) {
 				List<TreeNode> nodes = createNodes(childComponents);
@@ -60,7 +60,7 @@ public class UiTemplateServiceImpl implements UiTemplateService {
 	private TreeNode createTreeNode(UiTemplate template) {
 		TreeNode treeNode = new TreeNode();
 		treeNode.setText(template.getNativeName());
-		treeNode.setTags(TagsUtil.createTags(template.getItemType()));
+		treeNode.setTags(TagsUtil.createTags(template.getUiTempId().toString()));
 		return treeNode;
 	}
 

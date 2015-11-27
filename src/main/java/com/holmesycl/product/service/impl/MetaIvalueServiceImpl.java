@@ -119,7 +119,7 @@ public class MetaIvalueServiceImpl implements MetaIvalueService {
 			treeNode.setTags(TagsUtil.createTags(ivalueAttr.getAttrName(), ivalueAttr.getMappingAttrId() + ""));
 			// 在需要选择节点中的节点，需要被选择
 			Set<Long> items = threadLocal.get();
-			if (items.contains(ivalueAttr.getMappingAttrId())) {
+			if (items != null && items.contains(ivalueAttr.getMappingAttrId())) {
 				State nodeState = new State();
 				nodeState.setSelected(true);
 				treeNode.setState(nodeState);
@@ -137,7 +137,7 @@ public class MetaIvalueServiceImpl implements MetaIvalueService {
 		List<MetaIvalueAttr> attrs = new ArrayList<MetaIvalueAttr>();
 		// 包含待选择的属性时，不需要展示其他属性
 		Set<Long> items = threadLocal.get();
-		if (items.size() > 0) {
+		if (items != null && items.size() > 0) {
 			for (MetaIvalueAttr ivalueAttr : ivalueAttrs) {
 				if (items.contains(ivalueAttr.getMappingAttrId())) {
 					attrs.add(ivalueAttr);

@@ -38,19 +38,11 @@
   		</div>
     	<div class="row">
     		<div class="col-md-6">
-    			<div class="row">
-    				<div class="col-md-12">
-    					<div id="objTree"></div>
-    				</div>
-    			</div>
+    			<div id="objTree"></div>
     		</div>
     		
     		<div class="col-md-6">
-    			<div class="row">
-    				<div class="col-md-12">
-    					<div id="valTree"></div>
-    				</div>
-    			</div>
+    			<div id="valTree"></div>
     		</div>
     	</div>
   	</div>
@@ -96,7 +88,9 @@
    		  	    			$('#valTree').treeview(valOptions);
    		  	    			$('#objTree').hideLoading();
    		  	    			// 滚动到顶部
-   		  	    			$('html,body').animate({scrollTop: 0},1000);
+   		  	    			if(data.length > 0){
+   		  	    				$('html,body').animate({scrollTop: 0}, 1000);
+   		  	    			}
    		  	    	 	});
    					}
    				}

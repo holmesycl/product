@@ -23,11 +23,19 @@ public class UiTemplateController {
 		return "meta/template";
 	}
 
+	/**
+	 * 根据模板ID或者模板名称查询模板的树形结构。
+	 * 
+	 * @param searchText
+	 *            模板ID或者模板名称
+	 * 
+	 * @return 树形结构的JSON格式
+	 */
 	@RequestMapping("/tree")
 	@ResponseBody
-	public List<TreeNode> findTreeByName(String name) {
+	public List<TreeNode> searchAsTree(String searchText) {
 		List<TreeNode> treeNodes = new ArrayList<TreeNode>();
-		treeNodes = uiTemplateService.findTemplateTreeByName(name);
+		treeNodes = uiTemplateService.findTemplateTreeByName(searchText);
 		return treeNodes;
 	}
 

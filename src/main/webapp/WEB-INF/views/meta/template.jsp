@@ -32,19 +32,33 @@
     				<div class="col-md-12">
     					<form class="form-inline" role="search" style="margin: 20px 0 20px 0;">
 					  		<div class="form-group">
-					    		<input name="searchText" type="text" class="form-control" placeholder="Search">
+					    		<input name="searchText" type="text" class="form-control" placeholder="模板ID/模板名称">
 					  		</div>
 					  		<button type="submit" class="btn btn-primary">搜索</button>
 						</form>
     				</div>
     			</div>
-    			<div class="row">
-    				<div class="col-md-12">
-    					<div id="tree"></div>
-    				</div>
-    			</div>
     		</div>
     	</div>
+    	
+    	<div class="row">
+    	
+    		<!-- 模板 -->
+ 			<div class="col-md-6">
+ 				<div id="temTree"></div>
+ 			</div>
+ 			
+ 			<!-- 对象 -->
+ 			<div class="col-md-6">
+ 				<div id="objTree"></div>
+ 			</div>
+ 			
+ 		</div>
+ 		
+ 		
+ 		<!-- alert modal -->
+ 		<jsp:include page="/alertModal.jsp"></jsp:include>
+ 		
   	</div>
     <!-- /.container -->
 
@@ -60,7 +74,8 @@
 		
     	(function($){
     		
-    		var baseUrl = "${contextPath }/ui/template";
+    		// 模板URL
+    		var temUrl = "${contextPath }/ui/template";
     		
     		var options = {
    	   			levels: 1,
@@ -69,20 +84,33 @@
    				emptyIcon: 'icon-file-alt',
    				showTags: true,
    				onNodeSelected: function(event, node) {
-   					alert(JSON.stringify(node));
+   					//alert(JSON.stringify(node));
    				}
    	    	}
     		
-    		$("form:first").submit(function(event){
+    		
+    		$("form:first").submit(function(e){
+    			// 阻止表单提交
+    			e.preventDefault();
+    			// 获取查询输入框的值
+    			var searchText = $(this).find('input[name="searchText"]').val();
+    			if($.trim(searchText) === ""){
+    				$('#alertModal').modal('toggle');
+    				return;
+    			}
     			$(this).showLoading();
-    			event.preventDefault();
-    			var searchText = $('input[name="searchText"]').val();
-    			$.post(baseUrl + "/tree",{name: searchText},function(data){
+    			$.post(temUrl + "/tree",{searchText: searchText},function(data){
     				options.data = data;
-    				$('#tree').treeview(options);
+    				$('#temTree').treeview(options);
     				$(this).hideLoading();
     	    	});
     		});
+    		
+    		// alert modal 显示时触发该事件
+    		$('#alertModal').on('show.bs.modal', function (e) {
+    			$(this).find('.modal-body > p:first').text('查询条件不能为空。');
+    		})
+    		
     		
     	})(jQuery);
 
