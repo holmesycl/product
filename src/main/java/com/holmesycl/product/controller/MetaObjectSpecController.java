@@ -33,26 +33,32 @@ public class MetaObjectSpecController {
 		metaObjectSpecService.save(object);
 		return object;
 	}
-	
-	
+
 	@RequestMapping("/home.html")
-	public String view(){
+	public String view() {
 		return "meta/object";
 	}
-	
+
 	@RequestMapping("/search")
 	@ResponseBody
-	public PageInfo<MetaObjectSpec> page(HttpServletRequest request, PageParam pageParam, String query){
+	public PageInfo<MetaObjectSpec> page(HttpServletRequest request, PageParam pageParam, String query) {
 		return metaObjectSpecService.page(pageParam, query);
 	}
-	
+
 	@RequestMapping("/tree")
 	@ResponseBody
-	public List<TreeNode> findTreeByName(String name) {
+	public List<TreeNode> findTreeBySearchText(String searchText) {
 		List<TreeNode> treeNodes = new ArrayList<TreeNode>();
-		treeNodes = metaObjectSpecService.findObjectTreeByName(name);
+		treeNodes = metaObjectSpecService.findObjectTreeByObjectIdOrName(searchText);
 		return treeNodes;
 	}
 
+	@RequestMapping("/tree/component")
+	@ResponseBody
+	public List<TreeNode> findTreeByComponent(long componentId) {
+		List<TreeNode> treeNodes = new ArrayList<TreeNode>();
+		treeNodes = metaObjectSpecService.findTreeByComponent(componentId);
+		return treeNodes;
+	}
 
 }

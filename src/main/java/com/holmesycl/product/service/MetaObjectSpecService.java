@@ -13,6 +13,8 @@ public interface MetaObjectSpecService {
 
 	public PageInfo<MetaObjectSpec> page(PageParam pageParam, String query);
 
-	public List<TreeNode> findObjectTreeByName(String name);
+	public List<TreeNode> findObjectTreeByObjectIdOrName(String objectIdOrName);
+
+	public List<TreeNode> findTreeByComponent(long componentId);
 
 }

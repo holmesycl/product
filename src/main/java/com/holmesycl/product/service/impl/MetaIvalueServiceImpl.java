@@ -133,7 +133,7 @@ public class MetaIvalueServiceImpl implements MetaIvalueService {
 		MetaIvalueAttrExample ivalueAttrExample = new MetaIvalueAttrExample();
 		ivalueAttrExample.createCriteria().andValueIdEqualTo(valueId);
 		List<MetaIvalueAttr> ivalueAttrs = metaIvalueAttrMapper.selectByExample(ivalueAttrExample);
-
+		/*
 		List<MetaIvalueAttr> attrs = new ArrayList<MetaIvalueAttr>();
 		// 包含待选择的属性时，不需要展示其他属性
 		Set<Long> items = threadLocal.get();
@@ -145,8 +145,8 @@ public class MetaIvalueServiceImpl implements MetaIvalueService {
 			}
 		} else {
 			attrs = ivalueAttrs;
-		}
-		return attrs;
+		}*/
+		return ivalueAttrs;
 	}
 
 	private TreeNode createTreeNode(MetaIvalue ivalue) {

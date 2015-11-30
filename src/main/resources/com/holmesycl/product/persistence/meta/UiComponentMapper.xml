@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.holmesycl.product.persistence.meta.UiComponentMapper" >
+  <cache />
   <resultMap id="BaseResultMap" type="com.holmesycl.product.domain.meta.UiComponent" >
     <id column="UI_COMPONENT_ID" property="uiComponentId" jdbcType="DECIMAL" />
     <result column="INTERNATIONAL_NAME" property="internationalName" jdbcType="VARCHAR" />

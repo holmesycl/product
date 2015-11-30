@@ -44,13 +44,18 @@
     	<div class="row">
     	
     		<!-- 模板 -->
- 			<div class="col-md-6">
+ 			<div class="col-md-4">
  				<div id="temTree"></div>
  			</div>
  			
  			<!-- 对象 -->
- 			<div class="col-md-6">
+ 			<div class="col-md-4">
  				<div id="objTree"></div>
+ 			</div>
+ 			
+ 			<!-- 数据库表 -->
+ 			<div class="col-md-4">
+ 				<div id="valTree"></div>
  			</div>
  			
  		</div>
@@ -76,17 +81,75 @@
     		
     		// 模板URL
     		var temUrl = "${contextPath }/ui/template";
+    		// 元数据对象URL
+    		var objUrl = "${contextPath }/meta/object";
+    		// 数据库表URL
+    		var valUrl = "${contextPath }/meta/ivalue/";
     		
+    		// 模板树
+    		var $temTree = $('#temTree');
+    		// 元素据对象树
+    		var $objTree = $('#objTree');
+    		// 数据库表树
+    		var $valTree = $('#valTree');
+    		
+    		// 树组件基础配置
     		var options = {
-   	   			levels: 1,
    				collapseIcon: 'icon-folder-open-alt',
    				expandIcon: 'icon-folder-close-alt',
    				emptyIcon: 'icon-file-alt',
-   				showTags: true,
-   				onNodeSelected: function(event, node) {
-   					//alert(JSON.stringify(node));
-   				}
+   				showTags: true
    	    	}
+    		
+    		// 数据库表树形组件配置
+    		var valOptions = {
+            	levels: 2
+            }
+    		valOptions = $.extend(valOptions, options);
+    		
+    		// 元数据对象树形组件配置
+    		var objOptions = {
+    			levels: 2,
+   				onNodeSelected: function(event, node) {
+   					console.log(node);
+   					$valTree.treeview('remove');
+   					if(!node.nodes){
+   						$objTree.showLoading();
+   		  				$.post(valUrl + "/tree/attr",{attrId: node.value},function(data){
+   		  					valOptions.data = data;
+   		  					$valTree.treeview(valOptions);
+   		  					$objTree.hideLoading();
+   		  	    			// 滚动到顶部
+   		  	    			if(data.length > 0){
+   		  	    				$('html,body').animate({scrollTop: 0}, 1000);
+   		  	    			}
+   		  	    	 	});
+   					}
+   				}
+    		};
+    		objOptions = $.extend(objOptions, options);
+    		
+    		// 模板树形组件配置
+    		var temOptions = {
+    			levels: 1,
+    			onNodeSelected: function(e, node) {
+    				console.log(node);
+    				$objTree.treeview('remove');
+   					if(!node.nodes){
+   						$temTree.showLoading();
+   		  				$.post(objUrl + "/tree/component",{componentId: node.value},function(data){
+   		  					objOptions.data = data;
+   		  					$objTree.treeview(objOptions);
+   		  					$temTree.hideLoading();
+   		  	    			// 滚动到顶部
+   		  	    			if(data.length > 0){
+   		  	    				$('html,body').animate({scrollTop: 0}, 1000);
+   		  	    			}
+   		  	    	 	});
+   					}
+   				}
+    		};
+    		temOptions = $.extend(temOptions, options);
     		
     		
     		$("form:first").submit(function(e){
@@ -100,8 +163,10 @@
     			}
     			$(this).showLoading();
     			$.post(temUrl + "/tree",{searchText: searchText},function(data){
-    				options.data = data;
-    				$('#temTree').treeview(options);
+    				// 一些清理
+    				clearTrees();
+    				temOptions.data = data;
+    				$temTree.treeview(temOptions);
     				$(this).hideLoading();
     	    	});
     		});
@@ -111,6 +176,14 @@
     			$(this).find('.modal-body > p:first').text('查询条件不能为空。');
     		})
     		
+    		/**
+    		 * 情况所有的树形结构
+    		 */
+    		function clearTrees(){
+    			$temTree.treeview('remove');
+    			$objTree.treeview('remove');
+    			$valTree.treeview('remove');
+    		}
     		
     	})(jQuery);
 

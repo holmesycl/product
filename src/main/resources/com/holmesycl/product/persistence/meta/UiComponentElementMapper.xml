@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.holmesycl.product.persistence.meta.UiComponentElementMapper" >
+  <cache />
+  <resultMap id="BaseResultMap" type="com.holmesycl.product.domain.meta.UiComponentElement" >
+    <id column="ATTR_COMP_ID" property="attrCompId" jdbcType="DECIMAL" />
+    <result column="ATTR_ID" property="attrId" jdbcType="DECIMAL" />
+    <result column="UI_COMPONENT_ID" property="uiComponentId" jdbcType="DECIMAL" />
+    <result column="IS_READ_ONLY" property="isReadOnly" jdbcType="CHAR" />
+    <result column="IS_NOT_NULL" property="isNotNull" jdbcType="CHAR" />
+    <result column="DEFAULT_VALUE" property="defaultValue" jdbcType="VARCHAR" />
+    <result column="IS_HIDE" property="isHide" jdbcType="CHAR" />
+    <result column="BEGIN_ROW" property="beginRow" jdbcType="DECIMAL" />
+    <result column="BEGIN_COL" property="beginCol" jdbcType="DECIMAL" />
+    <result column="ROW_NUM" property="rowNum" jdbcType="DECIMAL" />
+    <result column="COL_NUM" property="colNum" jdbcType="DECIMAL" />
+    <result column="PARAMETER1" property="parameter1" jdbcType="VARCHAR" />
+    <result column="PARAMETER2" property="parameter2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ATTR_COMP_ID, ATTR_ID, UI_COMPONENT_ID, IS_READ_ONLY, IS_NOT_NULL, DEFAULT_VALUE, 
+    IS_HIDE, BEGIN_ROW, BEGIN_COL, ROW_NUM, COL_NUM, PARAMETER1, PARAMETER2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.holmesycl.product.domain.meta.UiComponentElementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from META.UI_COMPONENT_ELEMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from META.UI_COMPONENT_ELEMENT
+    where ATTR_COMP_ID = #{attrCompId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from META.UI_COMPONENT_ELEMENT
+    where ATTR_COMP_ID = #{attrCompId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.holmesycl.product.domain.meta.UiComponentElementExample" >
+    delete from META.UI_COMPONENT_ELEMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.holmesycl.product.domain.meta.UiComponentElement" >
+    <selectKey resultType="java.lang.Long" keyProperty="attrCompId" order="BEFORE" >
+      SELECT meta.ui_component_element$seq.nextval FROM dual
+    </selectKey>
+    insert into META.UI_COMPONENT_ELEMENT (ATTR_COMP_ID, ATTR_ID, UI_COMPONENT_ID, 
+      IS_READ_ONLY, IS_NOT_NULL, DEFAULT_VALUE, 
+      IS_HIDE, BEGIN_ROW, BEGIN_COL, 
+      ROW_NUM, COL_NUM, PARAMETER1, 
+      PARAMETER2)
+    values (#{attrCompId,jdbcType=DECIMAL}, #{attrId,jdbcType=DECIMAL}, #{uiComponentId,jdbcType=DECIMAL}, 
+      #{isReadOnly,jdbcType=CHAR}, #{isNotNull,jdbcType=CHAR}, #{defaultValue,jdbcType=VARCHAR}, 
+      #{isHide,jdbcType=CHAR}, #{beginRow,jdbcType=DECIMAL}, #{beginCol,jdbcType=DECIMAL}, 
+      #{rowNum,jdbcType=DECIMAL}, #{colNum,jdbcType=DECIMAL}, #{parameter1,jdbcType=VARCHAR}, 
+      #{parameter2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.holmesycl.product.domain.meta.UiComponentElement" >
+    <selectKey resultType="java.lang.Long" keyProperty="attrCompId" order="BEFORE" >
+      SELECT meta.ui_component_element$seq.nextval FROM dual
+    </selectKey>
+    insert into META.UI_COMPONENT_ELEMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ATTR_COMP_ID,
+      <if test="attrId != null" >
+        ATTR_ID,
+      </if>
+      <if test="uiComponentId != null" >
+        UI_COMPONENT_ID,
+      </if>
+      <if test="isReadOnly != null" >
+        IS_READ_ONLY,
+      </if>
+      <if test="isNotNull != null" >
+        IS_NOT_NULL,
+      </if>
+      <if test="defaultValue != null" >
+        DEFAULT_VALUE,
+      </if>
+      <if test="isHide != null" >
+        IS_HIDE,
+      </if>
+      <if test="beginRow != null" >
+        BEGIN_ROW,
+      </if>
+      <if test="beginCol != null" >
+        BEGIN_COL,
+      </if>
+      <if test="rowNum != null" >
+        ROW_NUM,
+      </if>
+      <if test="colNum != null" >
+        COL_NUM,
+      </if>
+      <if test="parameter1 != null" >
+        PARAMETER1,
+      </if>
+      <if test="parameter2 != null" >
+        PARAMETER2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{attrCompId,jdbcType=DECIMAL},
+      <if test="attrId != null" >
+        #{attrId,jdbcType=DECIMAL},
+      </if>
+      <if test="uiComponentId != null" >
+        #{uiComponentId,jdbcType=DECIMAL},
+      </if>
+      <if test="isReadOnly != null" >
+        #{isReadOnly,jdbcType=CHAR},
+      </if>
+      <if test="isNotNull != null" >
+        #{isNotNull,jdbcType=CHAR},
+      </if>
+      <if test="defaultValue != null" >
+        #{defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="isHide != null" >
+        #{isHide,jdbcType=CHAR},
+      </if>
+      <if test="beginRow != null" >
+        #{beginRow,jdbcType=DECIMAL},
+      </if>
+      <if test="beginCol != null" >
+        #{beginCol,jdbcType=DECIMAL},
+      </if>
+      <if test="rowNum != null" >
+        #{rowNum,jdbcType=DECIMAL},
+      </if>
+      <if test="colNum != null" >
+        #{colNum,jdbcType=DECIMAL},
+      </if>
+      <if test="parameter1 != null" >
+        #{parameter1,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter2 != null" >
+        #{parameter2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.holmesycl.product.domain.meta.UiComponentElementExample" resultType="java.lang.Integer" >
+    select count(*) from META.UI_COMPONENT_ELEMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update META.UI_COMPONENT_ELEMENT
+    <set >
+      <if test="record.attrCompId != null" >
+        ATTR_COMP_ID = #{record.attrCompId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.attrId != null" >
+        ATTR_ID = #{record.attrId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.uiComponentId != null" >
+        UI_COMPONENT_ID = #{record.uiComponentId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isReadOnly != null" >
+        IS_READ_ONLY = #{record.isReadOnly,jdbcType=CHAR},
+      </if>
+      <if test="record.isNotNull != null" >
+        IS_NOT_NULL = #{record.isNotNull,jdbcType=CHAR},
+      </if>
+      <if test="record.defaultValue != null" >
+        DEFAULT_VALUE = #{record.defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isHide != null" >
+        IS_HIDE = #{record.isHide,jdbcType=CHAR},
+      </if>
+      <if test="record.beginRow != null" >
+        BEGIN_ROW = #{record.beginRow,jdbcType=DECIMAL},
+      </if>
+      <if test="record.beginCol != null" >
+        BEGIN_COL = #{record.beginCol,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rowNum != null" >
+        ROW_NUM = #{record.rowNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.colNum != null" >
+        COL_NUM = #{record.colNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parameter1 != null" >
+        PARAMETER1 = #{record.parameter1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parameter2 != null" >
+        PARAMETER2 = #{record.parameter2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update META.UI_COMPONENT_ELEMENT
+    set ATTR_COMP_ID = #{record.attrCompId,jdbcType=DECIMAL},
+      ATTR_ID = #{record.attrId,jdbcType=DECIMAL},
+      UI_COMPONENT_ID = #{record.uiComponentId,jdbcType=DECIMAL},
+      IS_READ_ONLY = #{record.isReadOnly,jdbcType=CHAR},
+      IS_NOT_NULL = #{record.isNotNull,jdbcType=CHAR},
+      DEFAULT_VALUE = #{record.defaultValue,jdbcType=VARCHAR},
+      IS_HIDE = #{record.isHide,jdbcType=CHAR},
+      BEGIN_ROW = #{record.beginRow,jdbcType=DECIMAL},
+      BEGIN_COL = #{record.beginCol,jdbcType=DECIMAL},
+      ROW_NUM = #{record.rowNum,jdbcType=DECIMAL},
+      COL_NUM = #{record.colNum,jdbcType=DECIMAL},
+      PARAMETER1 = #{record.parameter1,jdbcType=VARCHAR},
+      PARAMETER2 = #{record.parameter2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.holmesycl.product.domain.meta.UiComponentElement" >
+    update META.UI_COMPONENT_ELEMENT
+    <set >
+      <if test="attrId != null" >
+        ATTR_ID = #{attrId,jdbcType=DECIMAL},
+      </if>
+      <if test="uiComponentId != null" >
+        UI_COMPONENT_ID = #{uiComponentId,jdbcType=DECIMAL},
+      </if>
+      <if test="isReadOnly != null" >
+        IS_READ_ONLY = #{isReadOnly,jdbcType=CHAR},
+      </if>
+      <if test="isNotNull != null" >
+        IS_NOT_NULL = #{isNotNull,jdbcType=CHAR},
+      </if>
+      <if test="defaultValue != null" >
+        DEFAULT_VALUE = #{defaultValue,jdbcType=VARCHAR},
+      </if>
+      <if test="isHide != null" >
+        IS_HIDE = #{isHide,jdbcType=CHAR},
+      </if>
+      <if test="beginRow != null" >
+        BEGIN_ROW = #{beginRow,jdbcType=DECIMAL},
+      </if>
+      <if test="beginCol != null" >
+        BEGIN_COL = #{beginCol,jdbcType=DECIMAL},
+      </if>
+      <if test="rowNum != null" >
+        ROW_NUM = #{rowNum,jdbcType=DECIMAL},
+      </if>
+      <if test="colNum != null" >
+        COL_NUM = #{colNum,jdbcType=DECIMAL},
+      </if>
+      <if test="parameter1 != null" >
+        PARAMETER1 = #{parameter1,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter2 != null" >
+        PARAMETER2 = #{parameter2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATTR_COMP_ID = #{attrCompId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.holmesycl.product.domain.meta.UiComponentElement" >
+    update META.UI_COMPONENT_ELEMENT
+    set ATTR_ID = #{attrId,jdbcType=DECIMAL},
+      UI_COMPONENT_ID = #{uiComponentId,jdbcType=DECIMAL},
+      IS_READ_ONLY = #{isReadOnly,jdbcType=CHAR},
+      IS_NOT_NULL = #{isNotNull,jdbcType=CHAR},
+      DEFAULT_VALUE = #{defaultValue,jdbcType=VARCHAR},
+      IS_HIDE = #{isHide,jdbcType=CHAR},
+      BEGIN_ROW = #{beginRow,jdbcType=DECIMAL},
+      BEGIN_COL = #{beginCol,jdbcType=DECIMAL},
+      ROW_NUM = #{rowNum,jdbcType=DECIMAL},
+      COL_NUM = #{colNum,jdbcType=DECIMAL},
+      PARAMETER1 = #{parameter1,jdbcType=VARCHAR},
+      PARAMETER2 = #{parameter2,jdbcType=VARCHAR}
+    where ATTR_COMP_ID = #{attrCompId,jdbcType=DECIMAL}
+  </update>
+</mapper>

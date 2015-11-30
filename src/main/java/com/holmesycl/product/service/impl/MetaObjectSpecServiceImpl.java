@@ -10,13 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.base.Preconditions;
 import com.holmesycl.product.domain.meta.MetaAttrSpec;
 import com.holmesycl.product.domain.meta.MetaAttrSpecExample;
 import com.holmesycl.product.domain.meta.MetaObjectSpec;
 import com.holmesycl.product.domain.meta.MetaObjectSpecExample;
 import com.holmesycl.product.domain.meta.TreeNode;
+import com.holmesycl.product.domain.meta.TreeNode.State;
+import com.holmesycl.product.domain.meta.UiComponentElement;
+import com.holmesycl.product.domain.meta.UiComponentElementExample;
 import com.holmesycl.product.persistence.meta.MetaAttrSpecMapper;
 import com.holmesycl.product.persistence.meta.MetaObjectSpecMapper;
+import com.holmesycl.product.persistence.meta.UiComponentElementMapper;
 import com.holmesycl.product.service.MetaObjectSpecService;
 import com.holmesycl.product.util.PageParam;
 import com.holmesycl.product.util.SqlUtil;
@@ -31,6 +36,11 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 
 	@Autowired
 	private MetaAttrSpecMapper metaAttrSpecMapper;
+
+	@Autowired
+	private UiComponentElementMapper uiComponentElementMapper;
+	
+	private ThreadLocal<Long> threadLocal = new ThreadLocal<Long>();
 
 	public void save(MetaObjectSpec record) {
 		metaObjectSpecMapper.insert(record);
@@ -50,8 +60,8 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<TreeNode> findObjectTreeByName(String name) {
-		List<MetaObjectSpec> objectSpecs = findByName(name);
+	public List<TreeNode> findObjectTreeByObjectIdOrName(String objectIdOrName) {
+		List<MetaObjectSpec> objectSpecs = findByObjectOrName(objectIdOrName);
 		List<TreeNode> treeNodes = new ArrayList<TreeNode>();
 		for (MetaObjectSpec objectSpec : objectSpecs) {
 			TreeNode treeNode = createTreeNode(objectSpec);
@@ -63,12 +73,53 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 		return treeNodes;
 	}
 
+	@Transactional(readOnly = true)
+	public List<TreeNode> findTreeByComponent(long componentId) {
+		MetaObjectSpec objectSpec = findObjectByComponent(componentId);
+		List<TreeNode> treeNodes = findObjectTreeByObjectIdOrName(objectSpec.getObjectSpecId().toString());
+		return treeNodes;
+	}
+
+	/**
+	 * 根据组件ID获取元数据对象。
+	 * 
+	 * @param componentId
+	 *            组件ID
+	 * 
+	 * @return 元素据对象
+	 */
+	private MetaObjectSpec findObjectByComponent(long componentId) {
+
+		UiComponentElementExample componentElementExample = new UiComponentElementExample();
+		componentElementExample.createCriteria().andUiComponentIdEqualTo(componentId);
+
+		List<UiComponentElement> componentElements = uiComponentElementMapper.selectByExample(componentElementExample);
+		Preconditions.checkState(componentElements != null && componentElements.size() == 1, "根据组件ID：%s获取关联关系错误！", componentId);
+
+		UiComponentElement componentElement = componentElements.get(0);
+		componentElement = Preconditions.checkNotNull(componentElement);
+
+		MetaAttrSpec attrSpec = metaAttrSpecMapper.selectByPrimaryKey(componentElement.getAttrId());
+		attrSpec = Preconditions.checkNotNull(attrSpec);
+		threadLocal.set(attrSpec.getAttrId());
+
+		MetaObjectSpec objectSpec = metaObjectSpecMapper.selectByPrimaryKey(attrSpec.getObjectSpecId());
+
+		return objectSpec;
+	}
+
 	private List<TreeNode> createNodes(List<MetaAttrSpec> attrSpecs) {
 		List<TreeNode> treeNodes = new ArrayList<TreeNode>();
 		for (MetaAttrSpec attrSpec : attrSpecs) {
 			TreeNode treeNode = new TreeNode();
 			treeNode.setText(attrSpec.getName());
 			treeNode.setValue(attrSpec.getAttrId().toString());
+			Long existAttr = threadLocal.get();
+			if(existAttr != null && existAttr.equals(attrSpec.getAttrId())){
+				State state = new State();
+				state.setSelected(true);
+				treeNode.setState(state);
+			}
 			treeNode.setTags(TagsUtil.createTags(attrSpec.getAttrId().toString(), attrSpec.getDataType()));
 			treeNodes.add(treeNode);
 		}
@@ -90,9 +141,18 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 		return treeNode;
 	}
 
-	private List<MetaObjectSpec> findByName(String name) {
+	/**
+	 * 
+	 * @param objectIdOrName
+	 * @return
+	 */
+	private List<MetaObjectSpec> findByObjectOrName(String objectIdOrName) {
 		MetaObjectSpecExample objectSpecExample = new MetaObjectSpecExample();
-		objectSpecExample.createCriteria().andObjectSpecNameLike(SqlUtil.bothLike(name));
+		if (StringUtils.isNumeric(objectIdOrName)) {
+			objectSpecExample.createCriteria().andObjectSpecIdEqualTo(Long.parseLong(objectIdOrName));
+		} else {
+			objectSpecExample.createCriteria().andObjectSpecNameLike(SqlUtil.bothLike(objectIdOrName));
+		}
 		List<MetaObjectSpec> objectSpecs = metaObjectSpecMapper.selectByExample(objectSpecExample);
 		return objectSpecs;
 	}

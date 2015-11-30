@@ -35,7 +35,7 @@ public class UiTemplateController {
 	@ResponseBody
 	public List<TreeNode> searchAsTree(String searchText) {
 		List<TreeNode> treeNodes = new ArrayList<TreeNode>();
-		treeNodes = uiTemplateService.findTemplateTreeByName(searchText);
+		treeNodes = uiTemplateService.findTemplateTreeByTemplateIdOrName(searchText);
 		return treeNodes;
 	}
 

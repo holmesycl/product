@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.holmesycl.product.persistence.meta.MetaAttrSpecMapper" >
+  <cache />
   <resultMap id="BaseResultMap" type="com.holmesycl.product.domain.meta.MetaAttrSpec" >
     <id column="ATTR_ID" property="attrId" jdbcType="DECIMAL" />
     <result column="CODE" property="code" jdbcType="VARCHAR" />
