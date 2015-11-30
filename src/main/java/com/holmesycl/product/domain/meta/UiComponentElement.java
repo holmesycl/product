@@ -1,7 +1,14 @@
 package com.holmesycl.product.domain.meta;
 
-public class UiComponentElement {
-    private Long attrCompId;
+import java.io.Serializable;
+
+public class UiComponentElement implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5919963156445560185L;
+
+	private Long attrCompId;
 
     private Long attrId;
 

@@ -23,6 +23,7 @@ import com.holmesycl.product.persistence.meta.MetaAttrSpecMapper;
 import com.holmesycl.product.persistence.meta.MetaObjectSpecMapper;
 import com.holmesycl.product.persistence.meta.UiComponentElementMapper;
 import com.holmesycl.product.service.MetaObjectSpecService;
+import com.holmesycl.product.util.DataType;
 import com.holmesycl.product.util.PageParam;
 import com.holmesycl.product.util.SqlUtil;
 import com.holmesycl.product.util.TagsUtil;
@@ -39,7 +40,7 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 
 	@Autowired
 	private UiComponentElementMapper uiComponentElementMapper;
-	
+
 	private ThreadLocal<Long> threadLocal = new ThreadLocal<Long>();
 
 	public void save(MetaObjectSpec record) {
@@ -115,12 +116,20 @@ public class MetaObjectSpecServiceImpl implements MetaObjectSpecService {
 			treeNode.setText(attrSpec.getName());
 			treeNode.setValue(attrSpec.getAttrId().toString());
 			Long existAttr = threadLocal.get();
-			if(existAttr != null && existAttr.equals(attrSpec.getAttrId())){
+			if (existAttr != null && existAttr.equals(attrSpec.getAttrId())) {
 				State state = new State();
 				state.setSelected(true);
 				treeNode.setState(state);
 			}
-			treeNode.setTags(TagsUtil.createTags(attrSpec.getAttrId().toString(), attrSpec.getDataType()));
+			DataType dataType = DataType.createByOrginName(attrSpec.getDataType());
+			// 对于引用数据类型，需要加载元数据对象
+			if (dataType == DataType.OBJECT || dataType == DataType.LIST) {
+				Long refObjectSpecId = attrSpec.getRefObjectSpecId();
+				List<MetaAttrSpec> refAttrs = findByObjectSpec(refObjectSpecId);
+				List<TreeNode> refNodes = createNodes(refAttrs);
+				treeNode.setNodes(refNodes);
+			}
+			treeNode.setTags(TagsUtil.createTags(attrSpec.getAttrId().toString(), dataType.toLocalString()));
 			treeNodes.add(treeNode);
 		}
 		return treeNodes;

@@ -1,11 +1,17 @@
 package com.holmesycl.product.domain.meta;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UiComponentExample {
-    protected String orderByClause;
+public class UiComponentExample implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2932944917894718008L;
+
+	protected String orderByClause;
 
     protected boolean distinct;
 

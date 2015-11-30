@@ -1,7 +1,14 @@
 package com.holmesycl.product.domain.meta;
 
-public class MetaIvalueAttrRel {
-    private Long metaIvalueAttrRelId;
+import java.io.Serializable;
+
+public class MetaIvalueAttrRel implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 572697260088315398L;
+
+	private Long metaIvalueAttrRelId;
 
     private Long attrId;
 

@@ -49,9 +49,12 @@ public class UiTemplateServiceImpl implements UiTemplateService {
 		for (UiComponent component : components) {
 			TreeNode treeNode = new TreeNode();
 			treeNode.setText(component.getNativeName());
+			
 			treeNode.setValue(component.getUiComponentId().toString());
-			treeNode.setTags(TagsUtil.createTags(component.getUiComponentId().toString(),
-					ComponentType.createByOrginName(component.getCompType()).toLocalString()));
+			// 组件类型
+			ComponentType componentType = ComponentType.createByOrginName(component.getCompType());
+			
+			treeNode.setTags(TagsUtil.createTags(component.getUiComponentId().toString(), componentType != null ? componentType.toLocalString() : component.getCompType()));
 			List<UiComponent> childComponents = findByParent(component.getUiComponentId());
 			if (childComponents != null && childComponents.size() > 0) {
 				List<TreeNode> nodes = createNodes(childComponents);

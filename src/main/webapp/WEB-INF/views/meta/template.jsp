@@ -112,10 +112,11 @@
     			levels: 2,
    				onNodeSelected: function(event, node) {
    					console.log(node);
-   					$valTree.treeview('remove');
    					if(!node.nodes){
    						$objTree.showLoading();
    		  				$.post(valUrl + "/tree/attr",{attrId: node.value},function(data){
+   		  					$valTree.treeview('remove');
+   		  					
    		  					valOptions.data = data;
    		  					$valTree.treeview(valOptions);
    		  					$objTree.hideLoading();
@@ -134,10 +135,14 @@
     			levels: 1,
     			onNodeSelected: function(e, node) {
     				console.log(node);
-    				$objTree.treeview('remove');
-   					if(!node.nodes){
+    				console.log($.inArray('辅助控件',node.tags));
+   					if(!node.nodes || $.inArray('辅助控件',node.tags) > -1){
    						$temTree.showLoading();
    		  				$.post(objUrl + "/tree/component",{componentId: node.value},function(data){
+   		  					// 一些清理
+	   		    			$objTree.treeview('remove');
+	   		    			$valTree.treeview('remove');
+	   		    			
    		  					objOptions.data = data;
    		  					$objTree.treeview(objOptions);
    		  					$temTree.hideLoading();
@@ -164,7 +169,9 @@
     			$(this).showLoading();
     			$.post(temUrl + "/tree",{searchText: searchText},function(data){
     				// 一些清理
-    				clearTrees();
+    				$temTree.treeview('remove');
+    				$objTree.treeview('remove');
+    				$valTree.treeview('remove');
     				temOptions.data = data;
     				$temTree.treeview(temOptions);
     				$(this).hideLoading();
@@ -175,15 +182,7 @@
     		$('#alertModal').on('show.bs.modal', function (e) {
     			$(this).find('.modal-body > p:first').text('查询条件不能为空。');
     		})
-    		
-    		/**
-    		 * 情况所有的树形结构
-    		 */
-    		function clearTrees(){
-    			$temTree.treeview('remove');
-    			$objTree.treeview('remove');
-    			$valTree.treeview('remove');
-    		}
+
     		
     	})(jQuery);
 

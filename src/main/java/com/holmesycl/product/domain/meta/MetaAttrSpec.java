@@ -1,9 +1,15 @@
 package com.holmesycl.product.domain.meta;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MetaAttrSpec {
-    private Long attrId;
+public class MetaAttrSpec implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1458480653554720001L;
+
+	private Long attrId;
 
     private String code;
 
