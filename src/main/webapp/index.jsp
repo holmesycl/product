@@ -23,27 +23,58 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container">
+   	
+   	<!-- 导航 -->
+   	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="${contextPath }/index.jsp">Product</a>
+	    </div>
 	
-		<div ng-init="qty=1;cost=2">
-		  <b>订单:</b>
-		  <div>
-			数量: <input type="number" ng-model="qty" required >
-		  </div>
-		  <div>
-			单价: <input type="number" ng-model="cost" required >
-		  </div>
-		  <div>
-			<b>总价:{{qty * cost | currency}}</b> 
-		  </div>
-		</div>
-		
-	</div>
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">配置文档<span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="${contextPath }/static/docs/attribute.html" target="_blank">属性配置</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	      <ul class="nav navbar-nav">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">AIUPC<span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="${contextPath }/ui/template/home.html" target="_blank">模板查询</a></li>
+	            <li><a href="${contextPath }/meta/object/home.html" target="_blank">元素据查询</a></li>
+	            <li><a href="${contextPath }/meta/ivalue/home.html" target="_blank">表对象查询</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">你好，游客<span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">无账号，注册</a></li>
+	            <li><a href="#">有账号，登录</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+
     <!-- /.container -->
 
-
     <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
-    <script src=".${contextPath }/static/Flat-UI/js/vendor/jquery.min.js"></script>
+    <script src="${contextPath }/static/Flat-UI/js/vendor/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="${contextPath }/static/Flat-UI/js/vendor/video.js"></script>
     <script src="${contextPath }/static/Flat-UI/js/flat-ui.min.js"></script>
