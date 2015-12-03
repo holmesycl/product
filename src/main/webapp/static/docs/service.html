@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>服务配置</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="../Flat-UI/css/vendor/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="../Flat-UI/css/flat-ui.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/Flat-UI/img/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="../Flat-UI/js/vendor/html5shiv.js"></script>
+      <script src="../Flat-UI/js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  
+   	<div class="container-fluid">
+   		<div class="row">
+   			<div class="col-md-12">
+   				<ol class="breadcrumb">
+				  <li><a href="../../index.jsp">首页</a></li>
+				  <li><a href="../../index.jsp">配置文档</a></li>
+				  <li class="active">服务配置</li>
+				</ol>
+   			</div>
+   		</div>
+   		
+   		<div class="row">
+   			<div class="col-md-12">
+   				<pre>
+--新增服务
+insert into product.up_service (SERVICE_ID, SERVICE_TYPE, SERVICE_LEVEL, NEED_REGISTER, PS_TYPE, PS_SERVICE_TYPE, BASE_FLAG, RECORD_TABLE_NAME, DISPLAY_TYPE, ALLOW_MULTI, CREATER, CREATE_DATE, MODIFIER, MODIFY_DATE, DEL_FLAG, HAS_ACCOUNT_FEE, ACCOUNT_FEE_TYPE)
+select 390000099816 , null, null, null, null, null, '', '', '', null, 1601716, sysdate, null, null, '1', null, null from dual;
+insert into product.up_product_item (PRODUCT_ITEM_ID, EXTEND_ID, CODE, NAME, ALPHA_NAME, ITEM_TYPE, PRIORITY, SORT_BY, DESCRIPTION, CREATER, MODIFIER, STATE, DEL_FLAG, REMARKS, CREATE_DATE, MODIFY_DATE, EFF_DATE, EXP_DATE, USE_EFF_DATE, USE_EXP_DATE, ENTITY_ID, CHECKER, ISLOCK, SUPPLIER_ID, PROVIDER_TYPE, BUSINESS_DOMAIN_ID, OPER_REGION, SHORT_NAME)
+select 390000099816, null, '', '新增服务的名称', 'XZFWDMC', 'SERVICE', null, null, '', 1601716, null, 'U', '1', '', sysdate, null, null, null, null, null, null, null, '', null, null, null, '', '' from dual;
+
+--新增服务属性
+insert into product.up_product_item (PRODUCT_ITEM_ID, EXTEND_ID, CODE, NAME, ALPHA_NAME, ITEM_TYPE, PRIORITY, SORT_BY, DESCRIPTION, CREATER, MODIFIER, STATE, DEL_FLAG, REMARKS, CREATE_DATE, MODIFY_DATE, EFF_DATE, EXP_DATE, USE_EFF_DATE, USE_EXP_DATE, ENTITY_ID, CHECKER, ISLOCK, SUPPLIER_ID, PROVIDER_TYPE, BUSINESS_DOMAIN_ID, OPER_REGION, SHORT_NAME)
+select 390000099817, null, '是否独享', '是否独享', 'SFDX', 'ATTRIBUTE_SINGLE', null, null, '', 1601716, null, 'U', '1', '', sysdate, null, null, null, null, null, null, null, '', null, 1, null, '', '' from dual;
+insert into product.up_attr (ATTRIBUTE_ID, ATTR_TYPE_CODE, JAVA_FIELD_TYPE, ORACLE_FIELD_TYPE, PROD_ITEM_TYPE, ATTRIBUTE_KIND, ATTR_SRC_TYPE, ATTR_UNIT, DEFAULT_VALUE, VALUE_LIST_ID, INTERFACE_CLASS, VALUE_LENGTH, DISPLAY_VALUE_LENGTH, DISPLAY_TYPE, COL_SPAN, IS_EDIT, MUTI_VALUE_FLAG, MUTI_FLAG, KEY_TYPE, CHECK_DESC, PWD_FLAG, NULLABLE, CREATER, CREATE_DATE, MODIFIER, MODIFY_DATE, DEL_FLAG, VALID_MODE, DATA_VALIDATOR, DISPLAY_PARAM_TYPE, DISPLAY_PARAM_VALUE)
+select 390000099817, '其他', 'String','VARCHAR', '', 'ATTRIBUTE_SINGLE', '', '', '', '', '', null, null, null, null, '', '', '', '', '', '', '', 1601716, sysdate, null, null, '1', null, null, null, '' from dual;
+
+--服务关联属性
+insert into product.up_item_relat (ITEM_RELAT_ID, PRODUCT_ITEM_ID, RELAT_PRODUCT_ITEM_ID, PROD_ITEM_RELAT_KIND_ID, EXTEND_ATTR_A, EXTEND_ATTR_B, EXTEND_ATTR_C, EXTEND_ATTR_D, EXTEND_ATTR_E, EXTEND_ATTR_F, EXTEND_ATTR_G, EXTEND_ATTR_H, EXTEND_ATTR_I, EXTEND_ATTR_J, EXTEND_ATTR_K, EXTEND_ATTR_L, EXTEND_ATTR_M, EXTEND_ATTR_N, EXTEND_ATTR_O, SORT_BY, CREATER, CREATE_DATE, MODIFIER, MODIFY_DATE, DEL_FLAG, APPLY_REGION, PRIORITY)
+select 850003298990, 390000099816, 390000099817, 'SERVICE_GENERAL_ATTRIBUTE_SINGLE', '', '', null, null, null, null, '', '', null, null, '', '', '', '', null, 1, 1601716, sysdate, null, null, '1', '', null from dual;
+
+--产品关联服务
+insert into product.up_item_relat (ITEM_RELAT_ID, PRODUCT_ITEM_ID, RELAT_PRODUCT_ITEM_ID, PROD_ITEM_RELAT_KIND_ID, EXTEND_ATTR_A, EXTEND_ATTR_B, EXTEND_ATTR_C, EXTEND_ATTR_D, EXTEND_ATTR_E, EXTEND_ATTR_F, EXTEND_ATTR_G, EXTEND_ATTR_H, EXTEND_ATTR_I, EXTEND_ATTR_J, EXTEND_ATTR_K, EXTEND_ATTR_L, EXTEND_ATTR_M, EXTEND_ATTR_N, EXTEND_ATTR_O, SORT_BY, CREATER, CREATE_DATE, MODIFIER, MODIFY_DATE, DEL_FLAG, APPLY_REGION, PRIORITY)
+select 850003298991, 311999999998, 390000099816, 'SRVC_SINGLE_PRICE_SERVICE', '', '', null, null, null, null, '', '', null, null, '', '', '', '', null, null, 1601716, sysdate, null, null, '1', '', null from dual;
+				</pre>
+   			</div>
+   		</div>
+   	</div>
+    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+    <script src="../Flat-UI/js/vendor/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../Flat-UI/js/vendor/video.js"></script>
+    <script src="../Flat-UI/js/flat-ui.min.js"></script>
+	<!-- angularjs -->
+	<script src="../js/lib/angular.js"></script>
+  </body>
+</html>

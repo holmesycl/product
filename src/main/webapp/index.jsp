@@ -44,7 +44,8 @@
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">配置文档<span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="${contextPath }/static/docs/attribute.html" target="_blank">属性配置</a></li>
+	            <li><a href="${contextPath }/static/docs/attribute.html">属性配置</a></li>
+	            <li><a href="${contextPath }/static/docs/service.html">服务配置</a></li>
 	          </ul>
 	        </li>
 	      </ul>
@@ -52,9 +53,9 @@
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">AIUPC<span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="${contextPath }/ui/template/home.html" target="_blank">模板查询</a></li>
-	            <li><a href="${contextPath }/meta/object/home.html" target="_blank">元素据查询</a></li>
-	            <li><a href="${contextPath }/meta/ivalue/home.html" target="_blank">表对象查询</a></li>
+	            <li><a href="${contextPath }/ui/template/home.html">模板查询</a></li>
+	            <li><a href="${contextPath }/meta/object/home.html">元素据查询</a></li>
+	            <li><a href="${contextPath }/meta/ivalue/home.html">表对象查询</a></li>
 	          </ul>
 	        </li>
 	      </ul>
@@ -79,6 +80,6 @@
     <script src="${contextPath }/static/Flat-UI/js/vendor/video.js"></script>
     <script src="${contextPath }/static/Flat-UI/js/flat-ui.min.js"></script>
 	<!-- angularjs -->
-	<script src="${contextPath }/static/angularjs/angular.min.js"></script>
+	<script src="${contextPath }/static/js/lib/angular.js"></script>
   </body>
 </html>

@@ -25,7 +25,17 @@
   </head>
   <body>
 
-    <div class="container">
+    <div class="container-fluid">
+    	<div class="row">
+   			<div class="col-md-12">
+   				<ol class="breadcrumb">
+				  <li><a href="../../index.jsp">首页</a></li>
+				  <li><a href="../../index.jsp">AIUPC</a></li>
+				  <li class="active">模板查询</li>
+				</ol>
+   			</div>
+   		</div>
+   		
     	<div class="row">
     		<div class="col-md-6">
     			<div class="row">
