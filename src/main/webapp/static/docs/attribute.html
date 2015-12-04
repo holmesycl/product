@@ -35,23 +35,130 @@
    		
    		<div class="row">
    			<div class="col-md-12">
+   				<h5>取值定义</h5>
    				<pre>
---回退语句
---delete from product.up_product_item m where m.creater= 1795210;
---delete from product.up_attr m where m.creater= 1795210;
---delete from product.up_item_relat m where m.creater= 1795210;
-
---新增属性
-insert into product.up_product_item (PRODUCT_ITEM_ID, EXTEND_ID, CODE, NAME, ALPHA_NAME, ITEM_TYPE,PRIORITY,SORT_BY, DESCRIPTION, CREATER, MODIFIER, STATE, DEL_FLAG, REMARKS, CREATE_DATE, MODIFY_DATE, EFF_DATE, EXP_DATE, USE_EFF_DATE, USE_EXP_DATE, ENTITY_ID, CHECKER, ISLOCK, SUPPLIER_ID, PROVIDER_TYPE, BUSINESS_DOMAIN_ID, OPER_REGION, SHORT_NAME)
-select 390000047979, null, null, '属性名称', 'SXMC', 'ATTRIBUTE_SINGLE', null, null, null, 1795210, null, 'U', '1', null, sysdate, null, sysdate, null, null, null, null, null, null, null, null, null, null, null from dual;
-insert into product.up_attr (ATTRIBUTE_ID, ATTR_TYPE_CODE, JAVA_FIELD_TYPE, ORACLE_FIELD_TYPE, PROD_ITEM_TYPE, ATTRIBUTE_KIND, ATTR_SRC_TYPE, ATTR_UNIT, DEFAULT_VALUE, VALUE_LIST_ID, INTERFACE_CLASS, VALUE_LENGTH, DISPLAY_VALUE_LENGTH, DISPLAY_TYPE, COL_SPAN, IS_EDIT, MUTI_VALUE_FLAG, MUTI_FLAG, KEY_TYPE, CHECK_DESC, PWD_FLAG, NULLABLE, CREATER, CREATE_DATE, MODIFIER, MODIFY_DATE, DEL_FLAG, VALID_MODE, DATA_VALIDATOR, DISPLAY_PARAM_TYPE, DISPLAY_PARAM_VALUE)
-select 390000047979, null, null, null, null, 'ATTRIBUTE_SINGLE', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1795210, sysdate, null, null, '1', null, null, null, null from dual;
-
---服务关联属性
-insert into product.up_item_relat (ITEM_RELAT_ID, PRODUCT_ITEM_ID, RELAT_PRODUCT_ITEM_ID, PROD_ITEM_RELAT_KIND_ID, EXTEND_ATTR_A, EXTEND_ATTR_B, EXTEND_ATTR_C, EXTEND_ATTR_D, EXTEND_ATTR_E, EXTEND_ATTR_F, EXTEND_ATTR_G, EXTEND_ATTR_H, EXTEND_ATTR_I, EXTEND_ATTR_J, EXTEND_ATTR_K, EXTEND_ATTR_L, EXTEND_ATTR_M, EXTEND_ATTR_N, EXTEND_ATTR_O, SORT_BY, CREATER, CREATE_DATE, MODIFIER, MODIFY_DATE, DEL_FLAG, APPLY_REGION, PRIORITY)
-select 850004469500+rownum,  a.product_item_id,  390000047979, 'SERVICE_GENERAL_ATTRIBUTE_SINGLE', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1, 1795210, sysdate, null, null, '1', null, null
-from product.up_product_item a where a.product_item_id in (272999999998,272999999978);
-				</pre>
+NAME = '属性名称';
+// 拼音简写
+ALPHA = 'SXMC';
+// 创建人ID
+CREATER = 1795210;
+// 属性ID		 
+ATTR_ID = 390000047979; 		
+   				</pre>
+   			</div>
+   		</div>
+   		
+   		<div class="row">
+   			<div class="col-md-12">
+   				<h5>配置产品单元表(UP_PRODUCT_ITEM)</h5>
+   				<table class="table table-striped">
+   					<thead>
+   						<tr>
+   							<th>#</th>
+   							<th>字段名</th>
+   							<th>描述</th>
+   							<th>取值</th>
+   						</tr>
+   					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>PRODUCT_ITEM_ID</td>
+							<td>产品单元ID</td>
+							<td>ATTR_ID</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>NAME</td>
+							<td>产品单元名称</td>
+							<td>NAME</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>ALPHA_NAME</td>
+							<td>首字母简写</td>
+							<td>ALPHA</td>
+						</tr>
+						<tr class="warning">
+							<td>4</td>
+							<td>ITEM_TYPE</td>
+							<td>产品单元类型</td>
+							<td>'ATTRIBUTE_SINGLE'</td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td>CREATER</td>
+							<td>创建人</td>
+							<td>CREATER</td>
+						</tr>
+						<tr>
+							<td>6</td>
+							<td>STATE</td>
+							<td>产品单元状态</td>
+							<td>'U'</td>
+						</tr>
+						<tr>
+							<td>7</td>
+							<td>DEL_FLAG</td>
+							<td>删除标识</td>
+							<td>'1'</td>
+						</tr>
+						<tr>
+							<td>8</td>
+							<td>CREATE_DATE</td>
+							<td>创建时间</td>
+							<td>系统时间</td>
+						</tr>
+						<tr>
+							<td>9</td>
+							<td>EFF_DATE</td>
+							<td>受理生效时间</td>
+							<td>系统时间</td>
+						</tr>
+					</tbody>   					
+				</table>
+   			</div>
+   		</div>
+   		
+   		<div class="row">
+   			<div class="col-md-12">
+   				<h5>配置属性表(UP_ATTR)</h5>
+   				<table class="table table-striped">
+   					<thead>
+   						<tr>
+   							<th>#</th>
+   							<th>字段名</th>
+   							<th>描述</th>
+   							<th>取值</th>
+   						</tr>
+   					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>ATTRIBUTE_ID</td>
+							<td>属性ID</td>
+							<td>ATTR_ID</td>
+						</tr>
+						<tr class="warning">
+							<td>2</td>
+							<td>ATTRIBUTE_KIND</td>
+							<td>属性类型</td>
+							<td>'ATTRIBUTE_SINGLE'</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>CREATER</td>
+							<td>创建人</td>
+							<td>CREATER</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>DEL_FLAG</td>
+							<td>删除标识</td>
+							<td>'1'</td>
+						</tr>
+					</tbody>   					
+				</table>
    			</div>
    		</div>
    	</div>
