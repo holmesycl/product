@@ -46,6 +46,8 @@
 	          <ul class="dropdown-menu">
 	            <li><a href="${contextPath }/static/docs/attribute.html">属性配置</a></li>
 	            <li><a href="${contextPath }/static/docs/service.html">服务配置</a></li>
+	            <li><a href="${contextPath }/static/docs/business.html">操作配置</a></li>
+	          	<li><a href="${contextPath }/static/docs/pricePlan.html">价格计划配置</a></li>
 	          </ul>
 	        </li>
 	      </ul>

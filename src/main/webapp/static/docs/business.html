@@ -2,7 +2,7 @@
 <html lang="zh-CN" ng-app>
   <head>
     <meta charset="utf-8">
-    <title>服务配置</title>
+    <title>操作配置</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -28,7 +28,7 @@
    				<ol class="breadcrumb">
 				  <li><a href="../../index.jsp">首页</a></li>
 				  <li><a href="../../index.jsp">配置文档</a></li>
-				  <li class="active">服务配置</li>
+				  <li class="active">操作配置</li>
 				</ol>
    			</div>
    		</div>
@@ -37,14 +37,132 @@
    			<div class="col-md-12">
    				<h5>取值定义</h5>
    				<pre>
-SERVICE_NAME = '新增服务的名称';
+// 操作ID		 
+BUSINESS_ID = 390000047979;
+// 操作名称
+NAME = '融合总机责任人维护';
 // 拼音简写
-ALPHA_NAME = 'XZFWDMC';
+ALPHA = 'RHZJZRRWH';
 // 创建人ID
-CREATER = 1601716;
-// 服务ID		 
-SERVICE_ID = 390000099816; 		
+CREATER = 1402008;
    				</pre>
+   			</div>
+   		</div>
+   		
+   		<div class="row">
+   			<div class="col-md-12">
+   				<h5>操作类型(OPERATE_TYPE)</h5>
+   				<table class="table table-striped" id="operateType">
+   					<thead>
+   						<tr>
+   							<th>#</th>
+   							<th>字段名</th>
+   							<th>描述</th>
+   						</tr>
+   					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>MEMBER_ADD</td>
+							<td>成员添加</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>LOGOUT</td>
+							<td>注销</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>CREATE</td>
+							<td>开户/订购</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>CONTINUE_ORD</td>
+							<td>续订</td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td>CHANGE_OFFER</td>
+							<td>换套餐</td>
+						</tr>
+						<tr>
+							<td>6</td>
+							<td>BATCH_PREORDER</td>
+							<td>批量预受理</td>
+						</tr>
+						<tr>
+							<td>7</td>
+							<td>BATCH_CREATE</td>
+							<td>批量订购</td>
+						</tr>
+						<tr>
+							<td>8</td>
+							<td>CHANGE_CITY</td>
+							<td>携号换地市</td>
+						</tr>
+						<tr>
+							<td>9</td>
+							<td>MEMBER_CHG</td>
+							<td>成员变更</td>
+						</tr>
+						<tr>
+							<td>10</td>
+							<td>MEMBER_DEL</td>
+							<td>成员删除</td>
+						</tr>
+						<tr>
+							<td>11</td>
+							<td>OPEN</td>
+							<td>开机</td>
+						</tr>
+						<tr>
+							<td>12</td>
+							<td>OTHER</td>
+							<td>其他</td>
+						</tr>
+						<tr>
+							<td>13</td>
+							<td>OWE_OPEN</td>
+							<td>欠费开机</td>
+						</tr>
+						<tr>
+							<td>14</td>
+							<td>OWE_STOP</td>
+							<td>欠费停机</td>
+						</tr>
+						<tr>
+							<td>15</td>
+							<td>PAUSE</td>
+							<td>暂停</td>
+						</tr>
+						<tr>
+							<td>16</td>
+							<td>PREORDER</td>
+							<td>预受理</td>
+						</tr>
+						<tr>
+							<td>17</td>
+							<td>PRE_LOGOUT</td>
+							<td>预销户</td>
+						</tr>
+						<tr>
+							<td>18</td>
+							<td>RESUME</td>
+							<td>恢复</td>
+						</tr>
+						<tr>
+							<td>19</td>
+							<td>STOP</td>
+							<td>停机</td>
+						</tr>
+						<tr>
+							<td>20</td>
+							<td>UPDATE</td>
+							<td>变更</td>
+						</tr>
+					</tbody>   					
+				</table>
    			</div>
    		</div>
    		
@@ -65,25 +183,25 @@ SERVICE_ID = 390000099816;
 							<td>1</td>
 							<td>PRODUCT_ITEM_ID</td>
 							<td>产品单元ID</td>
-							<td>SERVICE_ID</td>
+							<td>BUSINESS_ID</td>
 						</tr>
 						<tr>
 							<td>2</td>
 							<td>NAME</td>
 							<td>产品单元名称</td>
-							<td>SERVICE_NAME</td>
+							<td>NAME</td>
 						</tr>
 						<tr>
 							<td>3</td>
 							<td>ALPHA_NAME</td>
 							<td>首字母简写</td>
-							<td>ALPHA_NAME</td>
+							<td>ALPHA</td>
 						</tr>
 						<tr class="warning">
 							<td>4</td>
 							<td>ITEM_TYPE</td>
 							<td>产品单元类型</td>
-							<td>'SERVICE'</td>
+							<td>'BUSINESS_OPERATION'</td>
 						</tr>
 						<tr>
 							<td>5</td>
@@ -116,7 +234,7 @@ SERVICE_ID = 390000099816;
    		
    		<div class="row">
    			<div class="col-md-12">
-   				<h5>配置服务表(UP_SERVICE)</h5>
+   				<h5>配置属性表(UP_ATTR)</h5>
    				<table class="table table-striped">
    					<thead>
    						<tr>
@@ -129,24 +247,36 @@ SERVICE_ID = 390000099816;
 					<tbody>
 						<tr>
 							<td>1</td>
-							<td>SERVICE_ID</td>
-							<td>服务ID</td>
-							<td>SERVICE_ID</td>
+							<td>BUSINESS_ID</td>
+							<td>属性ID</td>
+							<td>BUSINESS_ID</td>
 						</tr>
 						<tr>
 							<td>2</td>
+							<td>OPERATE_TYPE</td>
+							<td>操作类型编码</td>
+							<td><a href="#operateType">'UPDATE'</a></td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>BUSINESS_KIND</td>
+							<td>操作类型</td>
+							<td>'BUSINESS_OPERATION'</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>SHOW_TYPE</td>
+							<td>操作前台是否可见</td>
+							<td>0[{'0': '前台可见'}, {'1': '前台不可见'}]</td>
+						</tr>
+						<tr>
+							<td>4</td>
 							<td>CREATER</td>
 							<td>创建人</td>
 							<td>CREATER</td>
 						</tr>
 						<tr>
-							<td>3</td>
-							<td>CREATE_DATE</td>
-							<td>创建时间</td>
-							<td>系统时间</td>
-						</tr>
-						<tr>
-							<td>4</td>
+							<td>5</td>
 							<td>DEL_FLAG</td>
 							<td>删除标识</td>
 							<td>'1'</td>

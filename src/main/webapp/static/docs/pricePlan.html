@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>价格计划配置</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="../Flat-UI/css/vendor/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="../Flat-UI/css/flat-ui.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="/Flat-UI/img/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="../Flat-UI/js/vendor/html5shiv.js"></script>
+      <script src="../Flat-UI/js/vendor/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  
+   	<div class="container-fluid">
+   		<div class="row">
+   			<div class="col-md-12">
+   				<ol class="breadcrumb">
+				  <li><a href="../../index.jsp">首页</a></li>
+				  <li><a href="../../index.jsp">配置文档</a></li>
+				  <li class="active">价格计划配置</li>
+				</ol>
+   			</div>
+   		</div>
+   		
+   		<div class="row">
+   			<div class="col-md-12">
+   				<h5>取值定义</h5>
+   				<pre>
+// 价格计划ID		 
+PRICE_PLAN_ID = 230000000117;
+// 价格计划名称
+NAME = '美洲租机押金';
+// 拼音简写
+ALPHA = 'MZZJYJ';
+// 创建人ID
+CREATER = 44445;
+   				</pre>
+   			</div>
+   		</div>
+   		
+   		<div class="row">
+   			<div class="col-md-12">
+   				<h5>费用类型(PRICE_PLAN_TYPE_CD)</h5>
+   				<table class="table table-striped" id="pricePlanType">
+   					<thead>
+   						<tr>
+   							<th>#</th>
+   							<th>字段值</th>
+   							<th>描述</th>
+   						</tr>
+   					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>PRICE_PLAN_PKG_BUSI</td>
+							<td>手续费</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>PRICE_PLAN_DEDUCT_SCORE</td>
+							<td>积分扣减</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>PRICE_PLAN_AWARD_SCORE</td>
+							<td>积分赠送</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>PRICE_PLAN_DEDUCT_POINT</td>
+							<td>积点扣减</td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td>PRICE_PLAN_AWARD_POINT</td>
+							<td>积点赠送</td>
+						</tr>
+						<tr>
+							<td>6</td>
+							<td>PRICE_PLAN_PKG_PREPAY</td>
+							<td>预存</td>
+						</tr>
+						<tr>
+							<td>7</td>
+							<td>PRICE_PLAN_AWARD_PREPAY</td>
+							<td>赠送预存</td>
+						</tr>
+						<tr>
+							<td>8</td>
+							<td>PRICE_PLAN_PKG_DEPOSIT</td>
+							<td>押金</td>
+						</tr>
+						<tr>
+							<td>9</td>
+							<td>PRICE_PLAN_PKG_CARDFEE</td>
+							<td>SIM卡费</td>
+						</tr>
+						<tr>
+							<td>10</td>
+							<td>PRICE_PLAN_PKG_BACK</td>
+							<td>退费</td>
+						</tr>
+						<tr>
+							<td>11</td>
+							<td>PRICE_PLAN_PKG_PUNISH</td>
+							<td>违约金</td>
+						</tr>
+					</tbody>   					
+				</table>
+   			</div>
+   		</div>
+   		<div class="row">
+   			<div class="col-md-12">
+   				<h5>支付方式(PAY_METHOD)</h5>
+   				<table class="table table-striped" id="payMethod">
+   					<thead>
+   						<tr>
+   							<th>#</th>
+   							<th>字段值</th>
+   							<th>描述</th>
+   						</tr>
+   					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>3</td>
+							<td>前台缴纳</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>4</td>
+							<td>预存抵扣</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>5</td>
+							<td>转账单</td>
+						</tr>
+					</tbody>   					
+				</table>
+   			</div>
+   		</div>
+   		<div class="row">
+   			<div class="col-md-12">
+   				<h5>配置产品单元表(UP_PRODUCT_ITEM)</h5>
+   				<table class="table table-striped">
+   					<thead>
+   						<tr>
+   							<th>#</th>
+   							<th>字段名</th>
+   							<th>描述</th>
+   							<th>取值</th>
+   						</tr>
+   					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>PRODUCT_ITEM_ID</td>
+							<td>产品单元ID</td>
+							<td>PRICE_PLAN_ID</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>NAME</td>
+							<td>产品单元名称</td>
+							<td>NAME</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>ALPHA_NAME</td>
+							<td>首字母简写</td>
+							<td>ALPHA</td>
+						</tr>
+						<tr class="warning">
+							<td>4</td>
+							<td>ITEM_TYPE</td>
+							<td>产品单元类型</td>
+							<td>'PRICE_PLAN_PKG_BUSI'</td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td>CREATER</td>
+							<td>创建人</td>
+							<td>CREATER</td>
+						</tr>
+						<tr>
+							<td>6</td>
+							<td>STATE</td>
+							<td>产品单元状态</td>
+							<td>'U'</td>
+						</tr>
+						<tr>
+							<td>7</td>
+							<td>DEL_FLAG</td>
+							<td>删除标识</td>
+							<td>'1'</td>
+						</tr>
+						<tr>
+							<td>8</td>
+							<td>CREATE_DATE</td>
+							<td>创建时间</td>
+							<td>系统时间</td>
+						</tr>
+					</tbody>   					
+				</table>
+   			</div>
+   		</div>
+   		
+   		<div class="row">
+   			<div class="col-md-12">
+   				<h5>配置属性表(UP_ATTR)</h5>
+   				<table class="table table-striped">
+   					<thead>
+   						<tr>
+   							<th>#</th>
+   							<th>字段名</th>
+   							<th>描述</th>
+   							<th>取值</th>
+   						</tr>
+   					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>PRICE_PLAN_ID</td>
+							<td>价格计划ID</td>
+							<td>PRICE_PLAN_ID</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>PRICE_PLAN_TYPE_CD</td>
+							<td>价格计划类型</td>
+							<td><a href="#pricePlanType">'PRICE_PLAN_PKG_BUSI'</a></td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td>FEE_AMOUNT</td>
+							<td>资费费用(分)</td>
+							<td>350000</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>ACC_CODE</td>
+							<td>营业科目</td>
+							<td>5040251</td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td>CREATER</td>
+							<td>创建人</td>
+							<td>CREATER</td>
+						</tr>
+						<tr>
+							<td>6</td>
+							<td>CREATE_DATE</td>
+							<td>创建时间</td>
+							<td>系统时间</td>
+						</tr>
+						<tr>
+							<td>7</td>
+							<td>DEL_FLAG</td>
+							<td>删除标识</td>
+							<td>'1'</td>
+						</tr>
+						<tr>
+							<td>8</td>
+							<td>PAY_ACC_CODE</td>
+							<td>抵扣科目</td>
+							<td>5040251</td>
+						</tr>
+						<tr>
+							<td>9</td>
+							<td>PAY_METHOD</td>
+							<td>支付方式</td>
+							<td>5</td>
+						</tr>
+						<tr>
+							<td>10</td>
+							<td>CALC_FLAG</td>
+							<td>是否固定收取费用</td>
+							<td><span data-toggle="tooltip" data-placement="top" title="0: 是, 1: 否">0</span></td>
+						</tr>
+					</tbody>   					
+				</table>
+   			</div>
+   		</div>
+   	</div>
+    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
+    <script src="../Flat-UI/js/vendor/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../Flat-UI/js/vendor/video.js"></script>
+    <script src="../Flat-UI/js/flat-ui.min.js"></script>
+	<!-- angularjs -->
+	<script src="../js/lib/angular.js"></script>
+	
+	<script type="text/javascript">
+		$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
+  </body>
+</html>

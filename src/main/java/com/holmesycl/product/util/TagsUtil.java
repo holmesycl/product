@@ -11,4 +11,5 @@ public final class TagsUtil {
 		Collections.addAll(tagList, tags);
 		return tagList;
 	}
+
 }
