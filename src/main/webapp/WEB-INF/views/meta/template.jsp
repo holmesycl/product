@@ -36,18 +36,29 @@
    			</div>
    		</div>
    		
-    	<div class="row">
+    	<div class="row" style="margin: 20px 0 20px 0;">
     		<div class="col-md-6">
     			<div class="row">
     				<div class="col-md-12">
-    					<form class="form-inline" role="search" style="margin: 20px 0 20px 0;">
+    					<form class="form-inline" role="search">
 					  		<div class="form-group">
 					    		<input name="searchText" type="text" class="form-control" placeholder="模板ID/模板名称">
 					  		</div>
-					  		<button type="submit" class="btn btn-primary">搜索</button>
+					  		<button type="submit" class="btn btn-primary icon-search">搜索</button>
 						</form>
     				</div>
     			</div>
+    		</div>
+    		<div class="col-md-1 col-md-offset-5">
+    			<!-- 操作按钮区 -->
+ 				<div class="list-group" style="position: fixed;top: 200px;">
+ 					<!-- 查看 -->
+				  	<button type="button" id="viewBtn" class="list-group-item optBtn icon-eye-open" title="查看"></button>
+				  	<!-- 编辑 -->
+				  	<button type="button" id="editBtn" class="list-group-item optBtn icon-edit" title="编辑"></button>
+				  	<!-- 删除 -->
+				  	<button type="button" id="cutBtn" class="list-group-item optBtn icon-cut" title="删除"></button>
+				</div>
     		</div>
     	</div>
     	
@@ -59,7 +70,7 @@
  			</div>
  			
  			<!-- 对象 -->
- 			<div class="col-md-4">
+ 			<div class="col-md-3">
  				<div id="objTree"></div>
  			</div>
  			
@@ -67,7 +78,6 @@
  			<div class="col-md-4">
  				<div id="valTree"></div>
  			</div>
- 			
  		</div>
  		
  		
@@ -84,10 +94,11 @@
     <script src="${contextPath }/static/js/lib/bootstrap-treeview.js"></script>
     <script src="${contextPath }/static/showloading/js/loading.js"></script>
     
-    
     <script type="text/javascript">
 		
     	(function($){
+    		
+    		var alertMsg = "";
     		
     		// 模板URL
     		var temUrl = "${contextPath }/ui/template";
@@ -105,9 +116,9 @@
     		
     		// 树组件基础配置
     		var options = {
-   				collapseIcon: 'icon-folder-open-alt',
-   				expandIcon: 'icon-folder-close-alt',
-   				emptyIcon: 'icon-file-alt',
+   				collapseIcon: 'icon-minus-sign',
+   				expandIcon: 'icon-plus-sign',
+   				emptyIcon: 'icon-leaf',
    				showTags: true
    	    	}
     		
@@ -173,6 +184,7 @@
     			// 获取查询输入框的值
     			var searchText = $(this).find('input[name="searchText"]').val();
     			if($.trim(searchText) === ""){
+    				alertMsg = '查询条件不能为空！';
     				$('#alertModal').modal('toggle');
     				return;
     			}
@@ -190,10 +202,15 @@
     		
     		// alert modal 显示时触发该事件
     		$('#alertModal').on('show.bs.modal', function (e) {
-    			$(this).find('.modal-body > p:first').text('查询条件不能为空。');
+    			$(this).find('.modal-body > p:first').text(alertMsg);
+    			alertMsg = '';
     		})
-
     		
+    		$('button.optBtn').css('display', 'block').click(function(e){
+    			alertMsg = '敬请期待！';
+    			$('#alertModal').modal('toggle');
+    		});
+
     	})(jQuery);
 
     </script>
