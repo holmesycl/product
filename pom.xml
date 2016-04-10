@@ -40,7 +40,7 @@
 		<mysql.version>5.1.37</mysql.version>
 
 		<!-- oracle -->
-		<oracle.version>11.2.0.1.0</oracle.version>
+		<oracle-ojdbc.version>7</oracle-ojdbc.version>
 
 		<!-- Logging -->
 		<logback.version>1.1.3</logback.version>
@@ -126,11 +126,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.version}</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>${oracle.version}</version>
+			<artifactId>ojdbc7</artifactId>
+			<version>${oracle-ojdbc.version}</version>
 		</dependency>
 
 		<!-- Other Web dependencies -->
